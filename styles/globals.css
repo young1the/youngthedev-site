@@ -1,16 +1,22 @@
 :root {
-  --background: white;
+  --background: #ddd;
   --color: black;
 }
 
 :root[data-theme="dark"] {
   --background: black;
-  --color: white;
+  --color: #ddd;
 }
 
-/* :root[data-theme="red"] {
-  // red setting
-} */
+:root[data-theme="red"] {
+  --background: red;
+  --color: red;
+}
+
+:root[data-theme="apple"] {
+  --background: blue;
+  --color: blue;
+}
 
 body {
   background-color: var(--background);

@@ -1,5 +1,4 @@
-import themeInitializerScript from "./themeInitializerScript";
-import { themeConstants, modes } from "./constants";
-import useTheme from "./useTheme";
+import { themeConstants, themes } from "./constants";
+import useTheme from "./hook";
 
-export { themeInitializerScript, themeConstants, modes, useTheme };
+export { themeConstants, themes, useTheme };
