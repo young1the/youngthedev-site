@@ -1,6 +1,16 @@
 import Head from "next/head";
+import { NotionAPI } from "@/lib/notionAPI";
+import { useEffect } from "react";
 
-export default function Home() {
+export async function getStaticProps() {
+  const list = await NotionAPI.getDatabaseList();
+  return { props: { list } };
+}
+
+export default function Home({ list }: any) {
+  useEffect(() => {
+    console.log(list);
+  }, []);
   return (
     <>
       <Head>
@@ -9,9 +19,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <main style={{ height: "100vh" }}>
-          <h1>Hello World</h1>
-        </main>
+      <main style={{ height: "100vh" }}>
+        <h1>Hello World</h1>
+        {list &&
+          list.map((ele: any) => {
+            return (
+              <div key={ele.id}>
+                <h1>{ele.title}</h1>;
+              </div>
+            );
+          })}
+      </main>
     </>
   );
 }
