@@ -1,7 +1,17 @@
 import Heading from "@/components/text/LogoText/LogoText";
 import Head from "next/head";
+import { NotionAPI } from "@/lib/notionAPI";
+import { useEffect } from "react";
 
-export default function Home() {
+export async function getStaticProps() {
+  const list = await NotionAPI.getDatabaseList();
+  return { props: { list } };
+}
+
+export default function Home({ list }: any) {
+  useEffect(() => {
+    console.log(list);
+  }, []);
   return (
     <>
       <Head>
@@ -12,7 +22,6 @@ export default function Home() {
       </Head>
       <main style={{ height: "100vh" }}>
         <h1>Hello World</h1>
-        <Heading />
       </main>
     </>
   );
