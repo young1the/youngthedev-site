@@ -1,0 +1,8 @@
+.logoText {
+  display: inline-block;
+  font-size: 1.5rem;
+  border-right: 0.5rem solid;
+  padding-right: 0.5rem;
+  text-decoration: none;
+  color: var(--color);
+}

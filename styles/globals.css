@@ -1,21 +1,13 @@
 :root {
   --background: #ddd;
   --color: black;
+  --invert: 0;
 }
 
 :root[data-theme="dark"] {
   --background: black;
   --color: #ddd;
-}
-
-:root[data-theme="red"] {
-  --background: red;
-  --color: red;
-}
-
-:root[data-theme="apple"] {
-  --background: blue;
-  --color: blue;
+  --invert: 1;
 }
 
 body {

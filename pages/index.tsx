@@ -1,3 +1,4 @@
+import Heading from "@/components/text/LogoText/LogoText";
 import Head from "next/head";
 
 export default function Home() {
@@ -9,9 +10,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <main style={{ height: "100vh" }}>
-          <h1>Hello World</h1>
-        </main>
+      <main style={{ height: "100vh" }}>
+        <h1>Hello World</h1>
+        <Heading />
+      </main>
     </>
   );
 }
