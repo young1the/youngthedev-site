@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Heading from "./LogoText";
+import LogoText from "./LogoText";
 
 export default {
-  title: "button/Heading",
-  component: Heading,
+  title: "text/LogoText",
+  component: LogoText,
   argTypes: {},
-} as ComponentMeta<typeof Heading>;
+} as ComponentMeta<typeof LogoText>;
 
-const Template: ComponentStory<typeof Heading> = () => <Heading />;
+const Template: ComponentStory<typeof LogoText> = () => <LogoText />;
 
 export const Light = Template.bind({});
 Light.args = {};

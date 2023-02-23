@@ -1,17 +1,18 @@
-import Heading from "@/components/text/LogoText/LogoText";
 import Head from "next/head";
 import { NotionAPI } from "@/lib/notionAPI";
 import { useEffect } from "react";
+import Image from "next/image";
+import Marquee from "@/components/content/Marquee/Marquee";
 
-export async function getStaticProps() {
-  const list = await NotionAPI.getDatabaseList();
-  return { props: { list } };
-}
+// export async function getStaticProps() {
+//   const list = await NotionAPI.getDatabaseList();
+//   return { props: { list } };
+// }
 
 export default function Home({ list }: any) {
-  useEffect(() => {
-    console.log(list);
-  }, []);
+  // useEffect(() => {
+  //   console.log(list);
+  // }, []);
   return (
     <>
       <Head>
@@ -20,6 +21,7 @@ export default function Home({ list }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Marquee value={"new release"} />
       <main style={{ height: "100vh" }}>
         <h1>Hello World</h1>
       </main>

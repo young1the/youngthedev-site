@@ -1,12 +1,12 @@
 :root {
   --background: #ddd;
-  --color: black;
+  --color: #4e5562;
   --invert: 0;
 }
 
 :root[data-theme="dark"] {
-  --background: black;
-  --color: #ddd;
+  --background: #4e5562;
+  --color: #b1aa9c;
   --invert: 1;
 }
 
