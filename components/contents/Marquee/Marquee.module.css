@@ -3,13 +3,14 @@
   width: 100%;
   background-color: black;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  bottom: 0;
 }
 
 .track {
   width: 300%;
   position: absolute;
-  animation: scroll 20s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 .text {
@@ -21,10 +22,10 @@
 
 @keyframes scroll {
   0% {
-    transform: translateX(0%);
+    transform: translateX(50%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 

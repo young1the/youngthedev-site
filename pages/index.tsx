@@ -2,7 +2,8 @@ import Head from "next/head";
 import { NotionAPI } from "@/lib/notionAPI";
 import { useEffect } from "react";
 import Image from "next/image";
-import Marquee from "@/components/content/Marquee/Marquee";
+import Marquee from "@/components/contents/Marquee/Marquee";
+import Hero from "@/components/contents/Hero/Hero";
 
 // export async function getStaticProps() {
 //   const list = await NotionAPI.getDatabaseList();
@@ -21,9 +22,8 @@ export default function Home({ list }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Marquee value={"new release"} />
-      <main style={{ height: "100vh" }}>
-        <h1>Hello World</h1>
+      <main style={{ marginTop: "100px" }}>
+        <Hero />
       </main>
     </>
   );
