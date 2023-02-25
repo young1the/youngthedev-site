@@ -8,21 +8,22 @@
 }
 
 .track {
-  width: 300%;
+  width: 400%;
   position: absolute;
-  animation: scroll 30s linear infinite;
+  animation: scroll 10s linear infinite;
 }
 
 .text {
   display: inline-block;
-  width: calc(100% / 9);
+  text-align: center;
+  width: calc(100% / 8);
   color: white;
   font-size: 14px;
 }
 
 @keyframes scroll {
   0% {
-    transform: translateX(50%);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-50%);

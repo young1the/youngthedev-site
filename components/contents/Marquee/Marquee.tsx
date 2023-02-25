@@ -16,7 +16,6 @@ const Marquee = ({ value }: MarqueeProps) => {
         <div className={style.text}>{value}</div>
         <div className={style.text}>{value}</div>
         <div className={style.text}>{value}</div>
-        <div className={style.text}>{value}</div>
       </div>
     </div>
   );
