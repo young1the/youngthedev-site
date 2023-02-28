@@ -4,5 +4,4 @@
 }
 .checkbox:checked ~ li {
   display: block;
-  list-style-type: circle;
 }
