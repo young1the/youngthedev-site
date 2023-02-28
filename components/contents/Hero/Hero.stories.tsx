@@ -9,5 +9,5 @@ export default {
 
 const Template: ComponentStory<typeof Hero> = () => <Hero />;
 
-export const Light = Template.bind({});
-Light.args = {};
+export const Default = Template.bind({});
+Default.args = {};

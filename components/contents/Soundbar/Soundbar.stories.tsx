@@ -9,4 +9,4 @@ export default {
 
 const Template: ComponentStory<typeof Soundbar> = () => <Soundbar />;
 
-export const Light = Template.bind({});
+export const Default = Template.bind({});

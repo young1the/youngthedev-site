@@ -9,4 +9,4 @@ export default {
 
 const Template: ComponentStory<typeof TrackList> = () => <TrackList />;
 
-export const Light = Template.bind({});
+export const Default = Template.bind({});

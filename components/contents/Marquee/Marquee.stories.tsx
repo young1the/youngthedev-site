@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof Marquee> = (args) => (
   <Marquee {...args} />
 );
 
-export const Light = Template.bind({});
-Light.args = {
+export const Default = Template.bind({});
+Default.args = {
   value: "infinite marquee",
 };

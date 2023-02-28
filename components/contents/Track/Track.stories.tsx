@@ -13,4 +13,4 @@ export default {
 
 const Template: ComponentStory<typeof Track> = (args) => <Track {...args} />;
 
-export const Light = Template.bind({});
+export const Default = Template.bind({});
