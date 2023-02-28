@@ -18,9 +18,10 @@ const useTrackScroll = () => {
         setSoundbarWidth("100%");
         return currentIndex - 1;
       }
-      setSoundbarWidth(
-        `${((calibrationScroll - scrolled) / elementHeight) * 100}%`
-      );
+      const lastPagePad = titleIndex === trackTitleList.length - 1 ? 100 : 0;
+      const percentage =
+        ((calibrationScroll - scrolled + lastPagePad) / elementHeight) * 100;
+      setSoundbarWidth(`${percentage}%`);
       return currentIndex;
     });
   }, []);
