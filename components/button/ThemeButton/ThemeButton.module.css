@@ -6,6 +6,7 @@
   align-items: center;
   animation: spin 2s linear infinite;
   cursor: pointer;
+  position: relative;
 }
 
 .star {

@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.order {
+  grid-area: order;
+}
+
+.title {
+  grid-area: title;
+  font-weight: 500;
+}

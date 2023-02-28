@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof ThemeButton> = (args) => (
   <ThemeButton {...args} />
 );
 
-export const Light = Template.bind({});
-Light.args = {};
+export const Default = Template.bind({});
+Default.args = {};

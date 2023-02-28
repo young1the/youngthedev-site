@@ -1,3 +1,3 @@
-import NotionAPI from "./worker";
+import NotionAPI from "./api";
 
 export { NotionAPI };

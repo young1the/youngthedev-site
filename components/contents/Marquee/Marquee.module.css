@@ -3,18 +3,20 @@
   width: 100%;
   background-color: black;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  bottom: 0;
 }
 
 .track {
-  width: 300%;
+  width: 400%;
   position: absolute;
-  animation: scroll 20s linear infinite;
+  animation: scroll 10s linear infinite;
 }
 
 .text {
   display: inline-block;
-  width: calc(100% / 9);
+  text-align: center;
+  width: calc(100% / 8);
   color: white;
   font-size: 14px;
 }
@@ -24,7 +26,7 @@
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
