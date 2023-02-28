@@ -1,11 +1,22 @@
 import Head from "next/head";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTrackScroll } from "@/lib/trackScroll";
 import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/contents/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
+import { NotionAPI } from "@/lib/notionAPI";
 
-export default function Home() {
+export async function getStaticProps() {
+  const list = await NotionAPI._getBlockContents(
+    "115d3bf2-7431-4feb-a8e5-c4d11cd3dfcd"
+  );
+  return { props: { list } };
+}
+
+export default function Home({ list }: any) {
+  useEffect(() => {
+    console.log(list);
+  }, []);
   const { soundbarWidth, currentTitle } = useTrackScroll();
   const first = useRef<HTMLDivElement>(null);
   const onClick = () => {

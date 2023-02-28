@@ -1,0 +1,8 @@
+.checkbox,
+.checkbox ~ li {
+  display: none;
+}
+.checkbox:checked ~ li {
+  display: block;
+  list-style-type: circle;
+}
