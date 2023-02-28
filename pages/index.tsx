@@ -1,19 +1,18 @@
 import Head from "next/head";
-import { NotionAPI } from "@/lib/notionAPI";
-import { useEffect } from "react";
-import Image from "next/image";
-import Marquee from "@/components/contents/Marquee/Marquee";
+import { useRef } from "react";
+import { useTrackScroll } from "@/lib/trackScroll";
 import Hero from "@/components/contents/Hero/Hero";
+import Soundbar from "@/components/contents/Soundbar/Soundbar";
+import Article from "@/components/contents/Article/Article";
 
-// export async function getStaticProps() {
-//   const list = await NotionAPI.getDatabaseList();
-//   return { props: { list } };
-// }
-
-export default function Home({ list }: any) {
-  // useEffect(() => {
-  //   console.log(list);
-  // }, []);
+export default function Home() {
+  const { soundbarWidth, currentTitle } = useTrackScroll();
+  const first = useRef<HTMLDivElement>(null);
+  const onClick = () => {
+    first?.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <Head>
@@ -22,9 +21,20 @@ export default function Home({ list }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ marginTop: "100px" }}>
-        <Hero />
-      </main>
+      <div
+        style={{
+          marginTop: "100px",
+          position: "relative",
+        }}
+      >
+        <Hero onClick={onClick} />
+        <Soundbar width={soundbarWidth} title={currentTitle} />
+        <Article ref={first} color="red" />
+        <Article color="yellow" />
+        <Article color="green" />
+        <Article color="blue" />
+        <Article color="purple" />
+      </div>
     </>
   );
 }

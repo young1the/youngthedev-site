@@ -1,12 +1,16 @@
 :root {
   --background: #ddd;
   --color: #4e5562;
+  --soundbar_background: white;
+  --soundbar_color: black;
   --invert: 0;
 }
 
 :root[data-theme="dark"] {
   --background: #4e5562;
   --color: #b1aa9c;
+  --soundbar_background: black;
+  --soundbar_color: white;
   --invert: 1;
 }
 
@@ -19,6 +23,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Reset CSS */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)

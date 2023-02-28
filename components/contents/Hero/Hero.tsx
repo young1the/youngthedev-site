@@ -4,9 +4,9 @@ import Marquee from "../Marquee/Marquee";
 import Button from "@/components/button/Button/Button";
 import TrackList from "../TrackList/TrackList";
 
-const Hero = () => {
+const Hero = ({ onClick }: any) => {
   return (
-    <div className={style.wrapper}>
+    <main className={style.wrapper}>
       <div className={style.grid}>
         <div className={style.artwork}>
           <Image draggable={false} src="/artwork.jpeg" fill alt="artwork" />
@@ -28,11 +28,11 @@ const Hero = () => {
           </div>
         </div>
         <div className={style.action}>
-          <Button label="재생하기" onClick={() => {}} />
+          <Button label="재생하기" onClick={onClick} />
         </div>
       </div>
       <TrackList />
-    </div>
+    </main>
   );
 };
 
