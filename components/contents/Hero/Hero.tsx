@@ -9,7 +9,13 @@ const Hero = ({ onClick }: any) => {
     <main className={style.wrapper}>
       <div className={style.grid}>
         <div className={style.artwork}>
-          <Image draggable={false} src="/artwork.jpeg" fill alt="artwork" />
+          <Image
+            priority={true}
+            draggable={false}
+            src="/artwork.jpeg"
+            fill
+            alt="artwork"
+          />
           <Marquee value="New Release" />
         </div>
         <div className={style.info}>

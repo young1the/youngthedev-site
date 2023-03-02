@@ -1,9 +1,10 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
+import style from "./Article.module.css";
 
-const Article = forwardRef(({ color }: any, ref: any) => {
+const Article = forwardRef(({ children }: any, ref: any) => {
   return (
-    <div ref={ref} style={{ height: "200vh", borderTop: `8px solid red` }}>
-      Article
+    <div ref={ref} className={style.wrapper}>
+      {children}
     </div>
   );
 });

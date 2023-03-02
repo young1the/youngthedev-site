@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof NotionLink> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  value: "깃허브링크",
-  href: "https://github.com",
+  content: {
+    url: "https://github.com",
+  },
 };

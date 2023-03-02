@@ -9,6 +9,7 @@
   padding: 0.4rem 1rem;
   background-color: var(--soundbar_background);
   color: var(--soundbar_color);
+  z-index: 42;
 }
 
 .controlContainer {

@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: transparent;
-  /* backdrop-filter: blur(4px); */
   padding: 1rem;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--color);
 }
