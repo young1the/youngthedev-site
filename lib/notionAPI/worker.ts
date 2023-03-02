@@ -1,5 +1,11 @@
 import { Client } from "@notionhq/client/build/src";
-import { ArticleType, ArticleKeys, ParsedDataType } from "./types";
+import {
+  ArticleType,
+  ArticleKeys,
+  ParsedDataType,
+  ProjectType,
+  PropertiesType,
+} from "./types";
 
 export default class NotionAPI {
   static _apiKey = process.env.NOTION_API_KEY;
@@ -19,6 +25,22 @@ export default class NotionAPI {
     return response.results;
   }
 
+  static _parseDataBaseResults(results: any[]): ProjectType[] {
+    const parsed = results.map((data) => {
+      const id = data.id;
+      const url = data.url;
+      const cover = data.cover.file.url;
+      const properties = data.properties as PropertiesType;
+      return { id, properties, url, cover };
+    });
+    return parsed;
+  }
+
+  static async getProjects() {
+    const results = await this._getDatabaseWithQuery();
+    const projects = this._parseDataBaseResults(results);
+    return projects;
+  }
   static async _getBlockContents(block_id: string) {
     const response = await this._notionInstance.blocks.children.list({
       block_id,
@@ -26,23 +48,13 @@ export default class NotionAPI {
     return response.results;
   }
 
-  static async getArticleContents(type: ArticleKeys) {
-    const block_id = this._articles[type];
-    if (typeof block_id === "string") {
-      const blockContents = await this._getBlockContents(block_id);
-      const contents = await this.getParsedContents(blockContents);
-      return contents;
-    }
-    return null;
-  }
-
-  static async getParsedContents(contents: any[]) {
+  static async _pickBlockContents(contents: any[]) {
     const parsedDatas: ParsedDataType[] = await Promise.all(
       contents.map(async (ele) => {
         let children = null;
         if (ele.has_children) {
           const childrenData = await this._getBlockContents(ele.id);
-          children = await this.getParsedContents(childrenData);
+          children = await this._pickBlockContents(childrenData);
         }
         return {
           type: ele.type,
@@ -53,5 +65,15 @@ export default class NotionAPI {
       })
     );
     return parsedDatas;
+  }
+
+  static async getArticleContents(type: ArticleKeys) {
+    const block_id = this._articles[type];
+    if (typeof block_id === "string") {
+      const blockContents = await this._getBlockContents(block_id);
+      const contents = await this._pickBlockContents(blockContents);
+      return contents;
+    }
+    return null;
   }
 }

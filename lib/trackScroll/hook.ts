@@ -7,7 +7,7 @@ const useTrackScroll = () => {
 
   const scrollEventHandler = useCallback(() => {
     setTitleIndex((currentIndex) => {
-      const elementHeight = 1.5 * window.innerHeight;
+      const elementHeight = 2 * window.innerHeight;
       const calibrationScroll = window.scrollY - 300;
       const scrolled = elementHeight * (currentIndex - 1);
       if (calibrationScroll >= elementHeight * currentIndex) {

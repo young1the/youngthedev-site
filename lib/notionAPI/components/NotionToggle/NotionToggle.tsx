@@ -9,10 +9,11 @@ interface NotionToggleProps {
 const NotionToggle = ({ content, children }: NotionToggleProps) => {
   return (
     <label>
-      <div style={{ fontWeight: "700", fontSize: "1.5rem", cursor: "pointer" }}>
-        👉 <NotionParagraph content={content} />
-      </div>
       <input type="checkbox" className={style.checkbox}></input>
+      <div className={style.toggle}>
+        <p className={style.toggleTriangle}>▶︎</p>
+        <NotionParagraph content={content} />
+      </div>
       {children.map((ele, index) => (
         <li key={index}>
           <NotionParagraph content={ele.content as TextConentType} />

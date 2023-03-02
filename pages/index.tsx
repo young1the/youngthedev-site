@@ -4,18 +4,21 @@ import { useTrackScroll } from "@/lib/trackScroll";
 import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/contents/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
-import { NotionAPI } from "@/lib/notionAPI";
-import NotionPage from "@/components/contents/NotionPage/NotionPage";
+import { NotionAPI, NotionPageRenderer } from "@/lib/notionAPI";
+import NotionProjectsRenderer from "@/lib/notionAPI/renderer/NotionProjectsRenderer/NotionProjectRenderer";
 
 export async function getStaticProps() {
   const seoulArticle = await NotionAPI.getArticleContents("seoul");
   const wantedArticle = await NotionAPI.getArticleContents("wanted");
-  const projects = await NotionAPI._getDatabaseWithQuery();
+  const projects = await NotionAPI.getProjects();
   return { props: { seoulArticle, wantedArticle, projects } };
 }
 
 export default function Home({ seoulArticle, wantedArticle, projects }: any) {
   const { soundbarWidth, currentTitle } = useTrackScroll();
+  useEffect(() => {
+    console.log(projects);
+  }, []);
   const first = useRef<HTMLDivElement>(null);
   const onClick = () => {
     first?.current?.scrollIntoView({
@@ -40,12 +43,14 @@ export default function Home({ seoulArticle, wantedArticle, projects }: any) {
         <Soundbar width={soundbarWidth} title={currentTitle} />
         <Article ref={first} color="red" />
         <Article color="yellow">
-          <NotionPage list={seoulArticle} />
+          <NotionPageRenderer notionPageContents={seoulArticle} />
         </Article>
         <Article color="green">
-          <NotionPage list={wantedArticle} />
+          <NotionPageRenderer notionPageContents={wantedArticle} />
         </Article>
-        <Article color="blue" />
+        <Article color="blue">
+          <NotionProjectsRenderer projects={projects} />
+        </Article>
         <Article color="purple" />
       </div>
     </>

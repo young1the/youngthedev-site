@@ -1,18 +1,24 @@
-import NotionLink from "@/components/text/NotionLink/NotionLink";
-import NotionParagraph from "@/components/text/NotionParagraph/NotionParagraph";
-import NotionToggle from "@/components/text/NotionToggle/NotionToggle";
-import style from "./NotionPage.module.css";
 import { memo } from "react";
+import NotionLink from "../../components/NotionLink/NotionLink";
+import NotionParagraph from "../../components/NotionParagraph/NotionParagraph";
+import NotionToggle from "../../components/NotionToggle/NotionToggle";
+import style from "./NotionPageRenderer.module.css";
 import {
   LinkPreviewType,
   ParsedDataType,
   TextConentType,
 } from "@/lib/notionAPI/types";
 
-const NotionPage = ({ list }: any) => {
+interface NotionPageRendererProps {
+  notionPageContents: ParsedDataType[];
+}
+
+const NotionPageRenderer = ({
+  notionPageContents,
+}: NotionPageRendererProps) => {
   return (
     <div className={style.wrapper}>
-      {list.map((ele: ParsedDataType) => {
+      {notionPageContents.map((ele: ParsedDataType) => {
         switch (ele.type) {
           case "paragraph":
             return (
@@ -42,4 +48,4 @@ const NotionPage = ({ list }: any) => {
   );
 };
 
-export default memo(NotionPage);
+export default memo(NotionPageRenderer);
