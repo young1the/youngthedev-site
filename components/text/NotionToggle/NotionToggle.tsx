@@ -1,16 +1,22 @@
+import { ParsedDataType, TextConentType } from "@/lib/notionAPI";
+import NotionParagraph from "../NotionParagraph/NotionParagraph";
 import style from "./NotionToggle.module.css";
 
 interface NotionToggleProps {
-  value: string;
-  children: string[];
+  content: TextConentType;
+  children: ParsedDataType[];
 }
-const NotionToggle = ({ value, children }: NotionToggleProps) => {
+const NotionToggle = ({ content, children }: NotionToggleProps) => {
   return (
     <label>
-      {value}
+      <div style={{ fontWeight: "700", fontSize: "1.5rem", cursor: "pointer" }}>
+        👉 <NotionParagraph content={content} />
+      </div>
       <input type="checkbox" className={style.checkbox}></input>
-      {children.map((ele) => (
-        <li>{ele}</li>
+      {children.map((ele, index) => (
+        <li key={index}>
+          <NotionParagraph content={ele.content as TextConentType} />
+        </li>
       ))}
     </label>
   );

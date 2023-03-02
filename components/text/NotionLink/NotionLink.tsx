@@ -1,13 +1,13 @@
+import { LinkPreviewType } from "@/lib/notionAPI";
 import style from "./NotionLink.module.css";
 
 interface NotionLinkProps {
-  value: string;
-  href: string;
+  content: LinkPreviewType;
 }
-const NotionLink = ({ value, href }: NotionLinkProps) => {
+const NotionLink = ({ content }: NotionLinkProps) => {
   return (
-    <a href={href} className={style.paragraph}>
-      {value}
+    <a href={content.url} className={style.link}>
+      to github
     </a>
   );
 };

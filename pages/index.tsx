@@ -5,18 +5,16 @@ import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/contents/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
 import { NotionAPI } from "@/lib/notionAPI";
+import NotionPage from "@/components/contents/NotionPage/NotionPage";
 
 export async function getStaticProps() {
-  const list = await NotionAPI._getBlockContents(
-    "115d3bf2-7431-4feb-a8e5-c4d11cd3dfcd"
-  );
-  return { props: { list } };
+  const seoulArticle = await NotionAPI.getArticleContents("seoul");
+  const wantedArticle = await NotionAPI.getArticleContents("wanted");
+  const projects = await NotionAPI._getDatabaseWithQuery();
+  return { props: { seoulArticle, wantedArticle, projects } };
 }
 
-export default function Home({ list }: any) {
-  useEffect(() => {
-    console.log(list);
-  }, []);
+export default function Home({ seoulArticle, wantedArticle, projects }: any) {
   const { soundbarWidth, currentTitle } = useTrackScroll();
   const first = useRef<HTMLDivElement>(null);
   const onClick = () => {
@@ -41,8 +39,12 @@ export default function Home({ list }: any) {
         <Hero onClick={onClick} />
         <Soundbar width={soundbarWidth} title={currentTitle} />
         <Article ref={first} color="red" />
-        <Article color="yellow" />
-        <Article color="green" />
+        <Article color="yellow">
+          <NotionPage list={seoulArticle} />
+        </Article>
+        <Article color="green">
+          <NotionPage list={wantedArticle} />
+        </Article>
         <Article color="blue" />
         <Article color="purple" />
       </div>

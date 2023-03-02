@@ -1,5 +1,5 @@
 import { Client } from "@notionhq/client/build/src";
-import { ArticleType, ArticleKeys } from "./types";
+import { ArticleType, ArticleKeys, ParsedDataType } from "./types";
 
 export default class NotionAPI {
   static _apiKey = process.env.NOTION_API_KEY;
@@ -15,6 +15,7 @@ export default class NotionAPI {
       database_id: this._databaseID as string,
       ...query,
     });
+    console.log(response.results);
     return response.results;
   }
 
@@ -28,10 +29,29 @@ export default class NotionAPI {
   static async getArticleContents(type: ArticleKeys) {
     const block_id = this._articles[type];
     if (typeof block_id === "string") {
-      const results = this._getBlockContents(block_id);
-      return results;
-    } else {
-      throw new Error();
+      const blockContents = await this._getBlockContents(block_id);
+      const contents = await this.getParsedContents(blockContents);
+      return contents;
     }
+    return null;
+  }
+
+  static async getParsedContents(contents: any[]) {
+    const parsedDatas: ParsedDataType[] = await Promise.all(
+      contents.map(async (ele) => {
+        let children = null;
+        if (ele.has_children) {
+          const childrenData = await this._getBlockContents(ele.id);
+          children = await this.getParsedContents(childrenData);
+        }
+        return {
+          type: ele.type,
+          id: ele.id,
+          content: ele[ele.type],
+          children,
+        };
+      })
+    );
+    return parsedDatas;
   }
 }
