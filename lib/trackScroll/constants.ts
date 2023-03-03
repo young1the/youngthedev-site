@@ -1,2 +1,2 @@
-const constants = ["_", "Intro", "Seoul", "Wanted", "With You", "Outro"];
+const constants = ["Intro", "Seoul", "Wanted", "With You", "Outro"];
 export const trackTitleList = Object.freeze(constants);

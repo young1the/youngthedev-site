@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useEffect, useRef } from "react";
 import { useTrackScroll } from "@/lib/trackScroll";
 import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/contents/Soundbar/Soundbar";
@@ -15,16 +14,15 @@ export async function getStaticProps() {
 }
 
 export default function Home({ seoulArticle, wantedArticle, projects }: any) {
-  const { soundbarWidth, currentTitle } = useTrackScroll();
-  useEffect(() => {
-    console.log(projects);
-  }, []);
-  const first = useRef<HTMLDivElement>(null);
-  const onClick = () => {
-    first?.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
+  const {
+    soundbarWidth,
+    currentTitle,
+    trackRefs,
+    onPlayClickHandler,
+    onNextClickHandler,
+    onPrevClickHandler,
+  } = useTrackScroll();
+
   return (
     <>
       <Head>
@@ -36,22 +34,26 @@ export default function Home({ seoulArticle, wantedArticle, projects }: any) {
       <div
         style={{
           marginTop: "100px",
-          position: "relative",
         }}
       >
-        <Hero onClick={onClick} />
-        <Soundbar width={soundbarWidth} title={currentTitle} />
-        <Article ref={first} color="red" />
-        <Article color="yellow">
+        <Hero onClick={onPlayClickHandler} />
+        <Soundbar
+          width={soundbarWidth}
+          title={currentTitle}
+          onNextClickHandler={onNextClickHandler}
+          onPrevClickHandler={onPrevClickHandler}
+        />
+        <Article ref={(ref) => (trackRefs.current[0] = ref)}></Article>
+        <Article ref={(ref) => (trackRefs.current[1] = ref)}>
           <NotionPageRenderer notionPageContents={seoulArticle} />
         </Article>
-        <Article color="green">
+        <Article ref={(ref) => (trackRefs.current[2] = ref)}>
           <NotionPageRenderer notionPageContents={wantedArticle} />
         </Article>
-        <Article color="blue">
+        <Article ref={(ref) => (trackRefs.current[3] = ref)}>
           <NotionProjectsRenderer projects={projects} />
         </Article>
-        <Article color="purple" />
+        <Article ref={(ref) => (trackRefs.current[4] = ref)}></Article>
       </div>
     </>
   );
