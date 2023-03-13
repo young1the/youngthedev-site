@@ -1,19 +1,36 @@
 import Head from "next/head";
 import { useTrackScroll } from "@/lib/trackScroll";
+import {
+  NotionAPI,
+  NotionPageRenderer,
+  NotionDatabaseRenderer,
+  Database,
+  NotionData,
+  Page,
+} from "@/lib/notionAPI";
 import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/contents/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
-import { NotionAPI, NotionPageRenderer } from "@/lib/notionAPI";
-import NotionProjectsRenderer from "@/lib/notionAPI/renderer/NotionProjectsRenderer/NotionProjectRenderer";
+import { useEffect } from "react";
+import Title from "@/components/text/Title/Title";
 
-export async function getStaticProps() {
-  const seoulArticle = await NotionAPI.getArticleContents("seoul");
-  const wantedArticle = await NotionAPI.getArticleContents("wanted");
-  const projects = await NotionAPI.getProjects();
-  return { props: { seoulArticle, wantedArticle, projects } };
+interface HomeProps {
+  notionCMS: NotionData[];
+  trackList: string[];
 }
 
-export default function Home({ seoulArticle, wantedArticle, projects }: any) {
+export async function getStaticProps() {
+  const notionCMS = await NotionAPI.getCMS();
+  const trackList = notionCMS.map((ele) => ele.title);
+  return {
+    props: {
+      notionCMS,
+      trackList,
+    },
+  };
+}
+
+export default function Home({ notionCMS, trackList }: HomeProps) {
   const {
     soundbarWidth,
     currentTitle,
@@ -21,7 +38,7 @@ export default function Home({ seoulArticle, wantedArticle, projects }: any) {
     onPlayClickHandler,
     onNextClickHandler,
     onPrevClickHandler,
-  } = useTrackScroll();
+  } = useTrackScroll(trackList);
 
   return (
     <>
@@ -36,24 +53,40 @@ export default function Home({ seoulArticle, wantedArticle, projects }: any) {
           marginTop: "100px",
         }}
       >
-        <Hero onClick={onPlayClickHandler} />
+        <Hero onClick={onPlayClickHandler} trackList={trackList} />
         <Soundbar
           width={soundbarWidth}
           title={currentTitle}
           onNextClickHandler={onNextClickHandler}
           onPrevClickHandler={onPrevClickHandler}
         />
-        <Article ref={(ref) => (trackRefs.current[0] = ref)}></Article>
-        <Article ref={(ref) => (trackRefs.current[1] = ref)}>
-          <NotionPageRenderer notionPageContents={seoulArticle} />
-        </Article>
-        <Article ref={(ref) => (trackRefs.current[2] = ref)}>
-          <NotionPageRenderer notionPageContents={wantedArticle} />
-        </Article>
-        <Article ref={(ref) => (trackRefs.current[3] = ref)}>
-          <NotionProjectsRenderer projects={projects} />
-        </Article>
-        <Article ref={(ref) => (trackRefs.current[4] = ref)}></Article>
+        {notionCMS.map((data, index) => {
+          let content;
+          if (data.type === "child_page") {
+            content = (
+              <NotionPageRenderer
+                key={data.id + "content"}
+                content={data.content as Page[]}
+              />
+            );
+          } else {
+            content = (
+              <NotionDatabaseRenderer
+                key={data.id + "content"}
+                content={data.content as Database[]}
+              />
+            );
+          }
+          return (
+            <Article
+              key={data.id}
+              ref={(ref) => (trackRefs.current[index] = ref)}
+            >
+              <Title key={data.id + "key"} value={data.title} />
+              {content}
+            </Article>
+          );
+        })}
       </div>
     </>
   );

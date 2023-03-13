@@ -4,7 +4,12 @@ import Marquee from "../Marquee/Marquee";
 import Button from "@/components/button/Button/Button";
 import TrackList from "../TrackList/TrackList";
 
-const Hero = ({ onClick }: any) => {
+interface HeroProps {
+  onClick: VoidFunction;
+  trackList: string[];
+}
+
+const Hero = ({ onClick, trackList }: HeroProps) => {
   return (
     <main className={style.wrapper}>
       <div className={style.grid}>
@@ -14,6 +19,7 @@ const Hero = ({ onClick }: any) => {
             draggable={false}
             src="/artwork.jpeg"
             fill
+            sizes="20rem 20rem"
             alt="artwork"
           />
           <Marquee value="New Release" />
@@ -37,7 +43,7 @@ const Hero = ({ onClick }: any) => {
           <Button label="재생하기" onClick={onClick} />
         </div>
       </div>
-      <TrackList />
+      <TrackList trackList={trackList} />
     </main>
   );
 };

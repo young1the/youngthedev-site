@@ -1,7 +1,7 @@
 .wrapper {
   height: 200vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4rem;
+  flex-direction: column;
+  padding: 10rem 4rem 4rem 4rem;
+  gap: 2rem;
 }

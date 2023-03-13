@@ -1,49 +1,46 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import NotionLink from "../../components/NotionLink/NotionLink";
 import NotionParagraph from "../../components/NotionParagraph/NotionParagraph";
 import NotionToggle from "../../components/NotionToggle/NotionToggle";
 import style from "./NotionPageRenderer.module.css";
-import {
-  LinkPreviewType,
-  ParsedDataType,
-  TextConentType,
-} from "@/lib/notionAPI/types";
+import { LinkPreviewType, Page, TextContent } from "@/lib/notionAPI/types";
 
 interface NotionPageRendererProps {
-  notionPageContents: ParsedDataType[];
+  content: Page[];
 }
 
-const NotionPageRenderer = ({
-  notionPageContents,
-}: NotionPageRendererProps) => {
+const NotionPageRenderer = ({ content }: NotionPageRendererProps) => {
+  const toJSX = (page: Page): JSX.Element | null => {
+    let { type, id, content, children } = page;
+    switch (type) {
+      case "synced_block":
+        return (
+          <Fragment key={id}>
+            {children?.map((page: Page) => {
+              return toJSX(page);
+            })}
+          </Fragment>
+        );
+      case "paragraph":
+        return <NotionParagraph key={id} content={content as TextContent} />;
+      case "link_preview":
+        return <NotionLink key={id} content={content as LinkPreviewType} />;
+      case "toggle":
+        return (
+          <NotionToggle
+            key={id}
+            content={content as TextContent}
+            children={children as Page[]}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={style.wrapper}>
-      {notionPageContents.map((ele: ParsedDataType) => {
-        switch (ele.type) {
-          case "paragraph":
-            return (
-              <NotionParagraph
-                key={ele.id}
-                content={ele.content as TextConentType}
-              />
-            );
-          case "link_preview":
-            return (
-              <NotionLink
-                key={ele.id}
-                content={ele.content as LinkPreviewType}
-              />
-            );
-          case "toggle":
-            return (
-              <NotionToggle
-                key={ele.id}
-                content={ele.content as TextConentType}
-                children={ele.children as ParsedDataType[]}
-              />
-            );
-        }
-      })}
+      {content.map((ele: Page) => toJSX(ele))}
     </div>
   );
 };

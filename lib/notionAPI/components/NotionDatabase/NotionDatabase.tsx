@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { ProjectType } from "../../types";
-import style from "./NotionProject.module.css";
+import { Database } from "../../types";
+import style from "./NotionDatabase.module.css";
 
-interface NotionProjectProps {
-  project: ProjectType;
+interface NotionDatabaseProps {
+  project: Database;
 }
-const NotionProject = ({ project }: NotionProjectProps) => {
+const NotionDatabase = ({ project }: NotionDatabaseProps) => {
   return (
     <a
       className={style.container}
@@ -34,4 +34,4 @@ const NotionProject = ({ project }: NotionProjectProps) => {
   );
 };
 
-export default NotionProject;
+export default NotionDatabase;

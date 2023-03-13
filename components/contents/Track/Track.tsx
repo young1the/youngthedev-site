@@ -1,6 +1,11 @@
 import style from "./Track.module.css";
 
-const Track = ({ order, title }: any) => {
+interface TrackProps {
+  order: number;
+  title: string;
+}
+
+const Track = ({ order, title }: TrackProps) => {
   return (
     <li className={style.wrapper}>
       <p className={style.order}>{order}</p>
