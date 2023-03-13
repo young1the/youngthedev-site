@@ -1,6 +1,18 @@
-import React from "react";
 import style from "./Soundbar.module.css";
-const Soundbar = ({ width, title }: any) => {
+
+interface SoundbarProps {
+  width: number;
+  title: string;
+  onPrevClickHandler: VoidFunction;
+  onNextClickHandler: VoidFunction;
+}
+
+const Soundbar = ({
+  width,
+  title,
+  onPrevClickHandler,
+  onNextClickHandler,
+}: SoundbarProps) => {
   return (
     <div className={style.container}>
       <div className={style.infoContainer}>
@@ -17,13 +29,20 @@ const Soundbar = ({ width, title }: any) => {
       </div>
       <div className={style.controlContainer}>
         <div className={style.timeLine}>11:11</div>
-        <div className={style.prevButton}>{"<"}</div>
+        <div onClick={onPrevClickHandler} className={style.prevButton}>
+          {"<"}
+        </div>
         <div className={style.playButton}>{"ㅁ"}</div>
-        <div className={style.nextButton}>{">"}</div>
+        <div onClick={onNextClickHandler} className={style.nextButton}>
+          {">"}
+        </div>
       </div>
       <div className={style.soundBar}>
         <div className={style.soundBarBackGround}></div>
-        <div className={style.soundBarFill} style={{ width: `${width}` }}></div>
+        <div
+          className={style.soundBarFill}
+          style={{ width: `${width}%` }}
+        ></div>
       </div>
     </div>
   );

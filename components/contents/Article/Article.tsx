@@ -1,12 +1,18 @@
-import { forwardRef } from "react";
+import { forwardRef, ReactNode, Ref } from "react";
 import style from "./Article.module.css";
 
-const Article = forwardRef(({ children }: any, ref: any) => {
-  return (
-    <div ref={ref} className={style.wrapper}>
-      {children}
-    </div>
-  );
-});
+type ArticleProps = {
+  children?: ReactNode;
+};
+
+const Article = forwardRef<HTMLDivElement, ArticleProps>(
+  ({ children }: ArticleProps, ref: Ref<HTMLDivElement>) => {
+    return (
+      <div ref={ref} className={style.wrapper}>
+        {children}
+      </div>
+    );
+  }
+);
 
 export default Article;

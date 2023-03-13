@@ -1,14 +1,16 @@
 import Track from "../Track/Track";
 import style from "./TrackList.module.css";
 
-const TrackList = () => {
+interface TrackListProps {
+  trackList: string[];
+}
+
+const TrackList = ({ trackList }: TrackListProps) => {
   return (
     <ol className={style.trackList}>
-      <Track order={1} title={"Intro"} />
-      <Track order={2} title={"42 Seool"} />
-      <Track order={3} title={"Wanted"} />
-      <Track order={4} title={"With You"} />
-      <Track order={5} title={"Outro"} />
+      {trackList.map((ele, index) => (
+        <Track key={ele} order={index + 1} title={ele} />
+      ))}
     </ol>
   );
 };
