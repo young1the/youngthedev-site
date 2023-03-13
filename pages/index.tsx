@@ -39,7 +39,6 @@ export default function Home({ notionCMS, trackList }: HomeProps) {
     onNextClickHandler,
     onPrevClickHandler,
   } = useTrackScroll(trackList);
-
   return (
     <>
       <Head>

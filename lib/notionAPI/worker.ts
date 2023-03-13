@@ -9,11 +9,11 @@ import {
 } from "./types";
 
 export default class NotionAPI {
-  static _apiKey = process.env.NOTION_API_KEY;
-  static _CMSID = process.env.NOTION_API_CMS_ID;
-  static _notionInstance = new Client({ auth: this._apiKey });
+  private static _apiKey = process.env.NOTION_API_KEY;
+  private static _CMSID = process.env.NOTION_API_CMS_ID;
+  private static _notionInstance = new Client({ auth: this._apiKey });
 
-  static async getCMS() {
+  public static async getCMS() {
     const datas = (await this._getBlockContents(
       this._CMSID as string
     )) as CMSBlock[];
@@ -34,7 +34,7 @@ export default class NotionAPI {
     return results;
   }
 
-  static async _getDatabaseWithQuery(
+  private static async _getDatabaseWithQuery(
     id: string,
     query = {}
   ): Promise<Database[]> {
@@ -46,7 +46,7 @@ export default class NotionAPI {
     return content;
   }
 
-  static _pickDatabase(results: DatabaseResponse[]): Database[] {
+  private static _pickDatabase(results: DatabaseResponse[]): Database[] {
     const content = results.map((data) => {
       const id = data.id;
       const url = data.url;
@@ -57,14 +57,14 @@ export default class NotionAPI {
     return content;
   }
 
-  static async _getBlockContents(block_id: string) {
+  private static async _getBlockContents(block_id: string) {
     const response = await this._notionInstance.blocks.children.list({
       block_id,
     });
     return response.results;
   }
 
-  static async _pickBlockContent(contents: BlockResponse[]) {
+  private static async _pickBlockContent(contents: BlockResponse[]) {
     const parsedDatas: Page[] = await Promise.all(
       contents.map(async (ele) => {
         let children = null;
@@ -85,7 +85,7 @@ export default class NotionAPI {
     return parsedDatas;
   }
 
-  static async _getPageContent(block_id: string) {
+  private static async _getPageContent(block_id: string) {
     const data = await this._getBlockContents(block_id);
     const content = await this._pickBlockContent(data as BlockResponse[]);
     return content;
