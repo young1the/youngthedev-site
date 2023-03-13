@@ -14,6 +14,7 @@ const Hero = ({ onClick, trackList }: HeroProps) => {
     <main className={style.wrapper}>
       <div className={style.grid}>
         <div className={style.artwork}>
+          <Marquee value="New Release" isTop={true} />
           <Image
             priority={true}
             draggable={false}

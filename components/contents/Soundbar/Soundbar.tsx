@@ -1,3 +1,7 @@
+import ModalBackDrop from "@/components/layout/ModalBackDrop/ModalBackDrop";
+import Image from "next/image";
+import { useState } from "react";
+import Spinner from "../Spinner/Spinner";
 import style from "./Soundbar.module.css";
 
 interface SoundbarProps {
@@ -13,10 +17,35 @@ const Soundbar = ({
   onPrevClickHandler,
   onNextClickHandler,
 }: SoundbarProps) => {
+  const isLoading = title === "Loading" ? true : false;
+  const convertToTime = (): string => {
+    if (width < 0 || width > 100 || isLoading) {
+      return "00:00";
+    }
+    const minutes = Math.floor((width * 282) / 100);
+    const hours = Math.floor(minutes / 60);
+    const paddedHours = hours.toString().padStart(2, "0");
+    const paddedMinutes = (minutes % 60).toString().padStart(2, "0");
+    return `${paddedHours}:${paddedMinutes}`;
+  };
+
   return (
     <div className={style.container}>
       <div className={style.infoContainer}>
-        <div className={style.infoThumbnail}></div>
+        <div className={style.infoThumbnail}>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Image
+              priority={true}
+              draggable={false}
+              src="/smallAW.png"
+              fill
+              sizes="2rem 2rem"
+              alt="artwork"
+            />
+          )}
+        </div>
         <div className={style.titleContainer}>
           <div className={style.infoTitle}>{title}</div>
           <div className={style.infoDetail}>youngthedev</div>
@@ -28,20 +57,19 @@ const Soundbar = ({
         </div>
       </div>
       <div className={style.controlContainer}>
-        <div className={style.timeLine}>11:11</div>
-        <div onClick={onPrevClickHandler} className={style.prevButton}>
-          {"<"}
+        <div className={style.timeLine}>{convertToTime()}</div>
+        <div onClick={onPrevClickHandler} className={style.controlButton}>
+          {"<<"}
         </div>
-        <div className={style.playButton}>{"ㅁ"}</div>
-        <div onClick={onNextClickHandler} className={style.nextButton}>
-          {">"}
+        <div onClick={onNextClickHandler} className={style.controlButton}>
+          {">>"}
         </div>
       </div>
       <div className={style.soundBar}>
         <div className={style.soundBarBackGround}></div>
         <div
           className={style.soundBarFill}
-          style={{ width: `${width}%` }}
+          style={isLoading ? { width: "0%" } : { width: `${width}%` }}
         ></div>
       </div>
     </div>

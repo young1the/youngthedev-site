@@ -6,7 +6,7 @@ export default {
   title: "content/Track",
   component: Track,
   args: {
-    order: "1",
+    order: 1,
     title: "Intro",
   },
 } as ComponentMeta<typeof Track>;

@@ -9,7 +9,7 @@
   padding: 0.4rem 1rem;
   background-color: var(--soundbar_background);
   color: var(--soundbar_color);
-  z-index: 42;
+  z-index: 3;
 }
 
 .controlContainer {
@@ -47,7 +47,7 @@
 .infoThumbnail {
   width: 2rem;
   height: 2rem;
-  background-color: aqua;
+  position: relative;
 }
 
 .soundBar {
@@ -87,4 +87,8 @@
 
 .feedbackControlerWrapper:hover {
   scale: 1.5;
+}
+
+.controlButton {
+  cursor: pointer;
 }
