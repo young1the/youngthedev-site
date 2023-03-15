@@ -1,8 +1,7 @@
 import style from "./SoundbarTitle.module.css";
+import { SoundbarProps } from "../Soundbar";
 
-interface SoundbarTitleProps {
-  title: string;
-}
+interface SoundbarTitleProps extends Pick<SoundbarProps, "title"> {}
 
 const SoundbarTitle = (props: SoundbarTitleProps) => {
   const { title } = props;

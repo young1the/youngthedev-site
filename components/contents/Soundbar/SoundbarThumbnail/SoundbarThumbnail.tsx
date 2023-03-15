@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Spinner from "@/components/contents/Spinner/Spinner";
 import style from "./SoundbarThumbnail.module.css";
+import { SoundbarProps } from "../Soundbar";
 
-interface SoundbarThumbnailProps {
-  title: string;
-}
+interface SoundbarThumbnailProps extends Pick<SoundbarProps, "title"> {}
 
 const SoundbarThumbnail = (props: SoundbarThumbnailProps) => {
   const { title } = props;

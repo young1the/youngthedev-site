@@ -5,7 +5,7 @@ import SoundbarFeedBack from "./SoundbarFeedBack/SoundbarFeedBack";
 import SoundbarThumbnail from "./SoundbarThumbnail/SoundbarThumbnail";
 import SoundbarTitle from "./SoundbarTitle/SoundbarTitle";
 
-interface SoundbarProps {
+export interface SoundbarProps {
   width: number;
   title: string;
   onPrevClickHandler: VoidFunction;

@@ -1,11 +1,13 @@
 import { useCallback } from "react";
 import style from "./SoundbarControlPanel.module.css";
 
-interface SoundbarControlPanelProps {
-  onPrevClickHandler: VoidFunction;
-  onNextClickHandler: VoidFunction;
-  width: number;
-}
+import { SoundbarProps } from "../Soundbar";
+
+interface SoundbarControlPanelProps
+  extends Pick<
+    SoundbarProps,
+    "onPrevClickHandler" | "onNextClickHandler" | "width"
+  > {}
 
 const SoundbarControlPanel = (props: SoundbarControlPanelProps) => {
   const { onPrevClickHandler, onNextClickHandler, width } = props;

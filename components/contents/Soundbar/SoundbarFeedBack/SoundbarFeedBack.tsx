@@ -1,9 +1,8 @@
 import style from "./SoundbarFeedBack.module.css";
+import { SoundbarProps } from "../Soundbar";
 
-interface SoundbarFeedBackProps {
-  title: string;
-  width: number;
-}
+interface SoundbarFeedBackProps
+  extends Pick<SoundbarProps, "title" | "width"> {}
 
 const SoundbarFeedBack = (props: SoundbarFeedBackProps) => {
   return (

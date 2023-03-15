@@ -1,8 +1,7 @@
+import { SoundbarProps } from "../Soundbar";
 import style from "./SoundbarBar.module.css";
 
-interface SoundbarBarProps {
-  width: number;
-}
+interface SoundbarBarProps extends Pick<SoundbarProps, "width"> {}
 
 const SoundbarBar = (props: SoundbarBarProps) => {
   const { width } = props;
