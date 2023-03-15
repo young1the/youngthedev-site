@@ -12,83 +12,8 @@
   z-index: 3;
 }
 
-.controlContainer {
-  display: flex;
-  gap: 2rem;
-}
-
-.timelineContainer {
-  display: flex;
-}
-
 .infoContainer {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.titleContainer {
-  text-align: left;
-}
-
-.infoTitle {
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.infoDetail {
-  font-size: 0.8rem;
-}
-
-.timeLine {
-  color: #777;
-}
-
-.infoThumbnail {
-  width: 2rem;
-  height: 2rem;
-  position: relative;
-}
-
-.soundBar {
-  height: 4px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.soundBarBackGround {
-  background-color: #cecece;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-
-.soundBarFill {
-  background-color: #f50;
-  height: 100%;
-  width: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.feedbackContainer {
-  display: flex;
-  gap: 1rem;
-}
-
-.feedbackControlerWrapper {
-  width: 1rem;
-  height: 1rem;
-  cursor: pointer;
-}
-
-.feedbackControlerWrapper:hover {
-  scale: 1.5;
-}
-
-.controlButton {
-  cursor: pointer;
 }

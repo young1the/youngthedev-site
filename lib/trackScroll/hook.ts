@@ -48,7 +48,7 @@ const useTrackScroll = (trackList: string[]) => {
   };
 
   return {
-    soundbarWidth,
+    soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,
     currentTitle: titleIndex < 0 ? "Loading" : trackList[titleIndex],
     trackRefs,
     onPlayClickHandler,
