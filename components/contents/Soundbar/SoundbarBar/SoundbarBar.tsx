@@ -1,5 +1,5 @@
-import { SoundbarProps } from "../Soundbar";
 import style from "./SoundbarBar.module.css";
+import { SoundbarProps } from "../Soundbar";
 
 interface SoundbarBarProps extends Pick<SoundbarProps, "width"> {}
 

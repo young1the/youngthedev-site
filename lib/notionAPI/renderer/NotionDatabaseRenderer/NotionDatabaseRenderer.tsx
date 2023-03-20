@@ -11,7 +11,7 @@ const NotionDatabaseRenderer = ({ content }: NotionDatabaseRendererProps) => {
   return (
     <div className={style.wrapper}>
       {content.map((project) => (
-        <NotionDatabase key={project.id} project={project} />
+        <NotionDatabase key={project.id} content={project} />
       ))}
     </div>
   );
