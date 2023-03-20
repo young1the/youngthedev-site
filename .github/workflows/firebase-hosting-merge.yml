@@ -19,6 +19,13 @@ jobs:
             NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
+      - name: generate env
+        run: |
+          echo "NOTION_API_CMS_ID=$NOTION_API_CMS_ID" >> .env
+          echo "NOTION_API_KEY=$NOTION_API_KEY" >> .env
+          env:
+            NOTION_API_CMS_ID: ${{ secrets.NOTION_API_CMS_ID }}
+            NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
