@@ -1,5 +1,4 @@
 import { LinkPreviewType } from "@/lib/notionAPI";
-import Image from "next/image";
 import style from "./NotionLink.module.css";
 
 interface NotionLinkProps {
@@ -16,12 +15,11 @@ const NotionLink = ({ content, width = 100 }: NotionLinkProps) => {
       rel="noopener noreferrer"
     >
       <div className={style.imageWrapper}>
-        <Image
+        <img
           className={style.git}
           src="/github.png"
+          style={{ width: "100%", height: "100%" }}
           alt="github"
-          fill
-          sizes="2rem, 2rem"
         />
       </div>
       {content.url}

@@ -30,7 +30,7 @@ const NotionPageRenderer = ({ content }: NotionPageRendererProps) => {
           <NotionToggle
             key={id}
             content={content as TextContent}
-            children={children as Page[]}
+            toggleChildren={children as Page[]}
           />
         );
       default:

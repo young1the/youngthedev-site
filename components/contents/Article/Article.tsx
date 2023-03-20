@@ -15,4 +15,6 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
   }
 );
 
+Article.displayName = "Article";
+
 export default Article;

@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { Database } from "../../types";
 import style from "./NotionDatabase.module.css";
 
@@ -15,7 +14,11 @@ const NotionDatabase = ({ content }: NotionDatabaseProps) => {
       rel="noopener noreferrer"
     >
       <div className={style.imageContainer}>
-        <Image src={content.cover} fill alt="thumbnail" sizes="15rem, 7rem" />
+        <img
+          src={content.cover}
+          alt="thumbnail"
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
       <div className={style.infoContainer}>
         <h1>{content.properties.이름.title[0].plain_text}</h1>
