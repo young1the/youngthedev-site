@@ -1,5 +1,4 @@
 import style from "./Hero.module.css";
-import Image from "next/image";
 import Marquee from "../Marquee/Marquee";
 import Button from "@/components/button/Button/Button";
 import TrackList from "../TrackList/TrackList";
@@ -15,12 +14,10 @@ const Hero = ({ onClick, trackList }: HeroProps) => {
       <div className={style.grid}>
         <div className={style.artwork}>
           <Marquee value="New Release" isTop={true} />
-          <Image
-            priority={true}
+          <img
             draggable={false}
             src="/artwork.jpeg"
-            fill
-            sizes="20rem 20rem"
+            style={{ width: "100%", height: "100%" }}
             alt="artwork"
           />
           <Marquee value="New Release" />

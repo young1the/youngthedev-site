@@ -1,8 +1,8 @@
-import { TextConentType } from "@/lib/notionAPI";
+import { TextContent } from "@/lib/notionAPI";
 import style from "./NotionParagraph.module.css";
 
 interface NotionParagraphProps {
-  content: TextConentType;
+  content: TextContent;
 }
 
 const NotionParagraph = ({ content }: NotionParagraphProps) => {

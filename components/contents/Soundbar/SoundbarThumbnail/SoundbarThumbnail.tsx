@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Spinner from "@/components/contents/Spinner/Spinner";
 import style from "./SoundbarThumbnail.module.css";
 import { SoundbarProps } from "../Soundbar";
@@ -13,12 +12,10 @@ const SoundbarThumbnail = (props: SoundbarThumbnailProps) => {
       {title === "Loading" ? (
         <Spinner />
       ) : (
-        <Image
-          priority={true}
+        <img
           draggable={false}
+          style={{ width: "100%", height: "100%" }}
           src="/smallAW.png"
-          fill
-          sizes="2rem 2rem"
           alt="artwork"
         />
       )}

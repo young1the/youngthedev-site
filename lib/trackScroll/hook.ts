@@ -25,7 +25,7 @@ const useTrackScroll = (trackList: string[]) => {
     const newWidth = Math.ceil(scrolledRatio * 100);
     setTitleIndex(newIndex);
     setSoundbarWidth(newWidth);
-  }, [scrollY]);
+  }, [scrollY, trackList.length]);
 
   const moveToDivElement = (element: HTMLDivElement | null) => {
     if (element) {

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import style from "./ThemeButton.module.css";
 
 interface ThemeButtonProps {
@@ -8,11 +7,11 @@ interface ThemeButtonProps {
 const ThemeButton = ({ onClick }: ThemeButtonProps) => {
   return (
     <div className={style.wrapper} onClick={onClick}>
-      <Image
+      <img
         className={style.star}
         src="/star.svg"
+        style={{ width: "100%", height: "100%" }}
         alt="theme change button"
-        fill
       />
     </div>
   );
