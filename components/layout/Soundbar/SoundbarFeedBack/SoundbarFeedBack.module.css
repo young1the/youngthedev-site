@@ -1,12 +1,13 @@
 .feedbackContainer {
   display: flex;
-  gap: 1rem;
 }
 
 .feedbackControlerWrapper {
-  width: 1rem;
-  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  font-size: 2rem;
 }
 
 .feedbackControlerWrapper:hover {
