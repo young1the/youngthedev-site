@@ -8,20 +8,7 @@ const SoundbarBar = (props: SoundbarBarProps) => {
   return (
     <div className={style.soundBar}>
       <div className={style.soundBarBackGround}></div>
-      <div className={style.soundBarFill} style={{ width: `${width}%` }}>
-        {/* <div
-        style={{
-          width: "9px",
-          height: "9px",
-          borderRadius: "50%",
-          position: "absolute",
-          top: "-3px",
-          left: `50vw`,
-          opacity: `${(1 / Math.abs(width - 50)) * 100}%`,
-          background: "red",
-        }}
-      ></div> */}
-      </div>
+      <div className={style.soundBarFill} style={{ width: `${width}%` }} />
     </div>
   );
 };

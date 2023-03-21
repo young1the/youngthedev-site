@@ -6,3 +6,9 @@ export type FirebaseConfig = {
   messagingSenderId: string | undefined;
   appId: string | undefined;
 };
+
+export type PostDataPayload = {
+  title: string;
+  comment: string;
+  time: number;
+};

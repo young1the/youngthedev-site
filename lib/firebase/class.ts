@@ -1,7 +1,7 @@
 import * as FirebaseApp from "firebase/app";
 import * as FirebaseAuth from "firebase/auth";
 import * as FirebaseDatabase from "firebase/database";
-import { FirebaseConfig } from "./types";
+import { FirebaseConfig, PostDataPayload } from "./types";
 
 export class FirebaseWorker {
   private config: FirebaseConfig;
@@ -67,42 +67,39 @@ export class FirebaseWorker {
   }
 
   onRealTimeDataBase(callback: any) {
-    console.log("onvalue called");
     return FirebaseDatabase.onValue(
-      FirebaseDatabase.ref(this.database, "/tracks/track1/comments"),
+      FirebaseDatabase.ref(this.database, "/tracks"),
       (snapshot) => {
         const data = snapshot.val();
-        const string = new String("안녕");
-        console.log("getValue");
-        callback(string);
+        callback(data);
       }
     );
   }
 
   offRealTimeDataBase() {
     FirebaseDatabase.off(
-      FirebaseDatabase.ref(this.database, "/tracks/track1/comments"),
+      FirebaseDatabase.ref(this.database, "/tracks"),
       "value"
     );
   }
 
-  postData() {
+  postData(payload: PostDataPayload) {
+    const { title, comment, time } = payload;
     FirebaseDatabase.push(
-      FirebaseDatabase.ref(this.database, "/tracks/track1/comments"),
+      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments`),
       {
-        comment: "hello",
-        time: 10,
+        comment,
+        time,
         uid: this.auth.currentUser?.uid,
+        displayName: this.auth.currentUser?.displayName ?? "익명",
       }
     );
   }
 
-  deleteData() {
+  deleteData(payload: any) {
+    const { id, title } = payload;
     FirebaseDatabase.remove(
-      FirebaseDatabase.ref(
-        this.database,
-        "/tracks/track1/comments/-NQU_tBQypVLzsJli7j4"
-      )
+      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments/${id}`)
     );
   }
 }
