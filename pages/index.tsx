@@ -9,7 +9,7 @@ import {
   Page,
 } from "@/lib/notionAPI";
 import Hero from "@/components/contents/Hero/Hero";
-import Soundbar from "@/components/contents/Soundbar/Soundbar";
+import Soundbar from "@/components/layout/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
 import Title from "@/components/text/Title/Title";
 
