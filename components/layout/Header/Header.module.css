@@ -11,4 +11,5 @@
   padding: 1rem;
   background-color: var(--background);
   border-bottom: 1px solid var(--color);
+  z-index: 2;
 }

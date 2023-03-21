@@ -1,0 +1,22 @@
+.soundBar {
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.soundBarBackGround {
+  background-color: #cecece;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.soundBarFill {
+  background-color: #f50;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

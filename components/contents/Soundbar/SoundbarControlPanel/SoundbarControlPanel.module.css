@@ -1,0 +1,7 @@
+.controlContainer {
+  display: flex;
+  gap: 2rem;
+}
+.controlButton {
+  cursor: pointer;
+}
