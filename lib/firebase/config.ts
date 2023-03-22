@@ -1,9 +1,12 @@
 export const firebaseConfig = {
-  apiKey: process.env.FIREBASE_CONFIG_API_KEY,
-  authDomain: process.env.FIREBASE_CONFIG_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_CONFIG_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_CONFIG_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_CONFIG_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_CONFIG_APP_ID,
-  databaseURL: process.env.FIREBASE_CONFIG_DATABASE_URL,
+  apiKey: "AIzaSyB9KjsPjuFe-ehQ2HcBtps9tQq6HjYh6Sw",
+  authDomain: "youngthedev-site.firebaseapp.com",
+  databaseURL:
+    "https://youngthedev-site-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "youngthedev-site",
+  storageBucket: "youngthedev-site.appspot.com",
+  messagingSenderId: "773344253998",
+  appId: "1:773344253998:web:1c02f10be3f31be84027bf",
 };
+
+// https://haranglog.tistory.com/25
