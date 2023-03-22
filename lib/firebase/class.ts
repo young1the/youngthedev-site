@@ -1,44 +1,47 @@
-import * as FireBaseApp from "firebase/app";
-import * as FireBaseAuth from "firebase/auth";
-import * as FireBaseDatabase from "firebase/database";
-import { FirebaseConfig } from "./types";
+import * as FirebaseApp from "firebase/app";
+import * as FirebaseAuth from "firebase/auth";
+import * as FirebaseDatabase from "firebase/database";
+import { FirebaseConfig, PostDataPayload } from "./types";
 
 export class FirebaseWorker {
   private config: FirebaseConfig;
-  private app: FireBaseApp.FirebaseApp;
-  private googleProvider: FireBaseAuth.GoogleAuthProvider;
-  private auth: FireBaseAuth.Auth;
-  private database: FireBaseDatabase.Database;
+  private app: FirebaseApp.FirebaseApp;
+  private googleProvider: FirebaseAuth.GoogleAuthProvider;
+  private auth: FirebaseAuth.Auth;
+  private database: FirebaseDatabase.Database;
 
   constructor(initConfig: FirebaseConfig) {
     this.config = { ...initConfig };
-    this.app = FireBaseApp.initializeApp(this.config);
-    this.googleProvider = new FireBaseAuth.GoogleAuthProvider();
-    this.auth = FireBaseAuth.getAuth();
-    this.database = FireBaseDatabase.getDatabase();
+    this.app = FirebaseApp.initializeApp(this.config);
+    this.googleProvider = new FirebaseAuth.GoogleAuthProvider();
+    this.auth = FirebaseAuth.getAuth();
+    this.database = FirebaseDatabase.getDatabase();
   }
 
-  test() {
-    console.log(this.auth.currentUser);
+  getCurrentUser() {
+    return this.auth.currentUser?.uid;
+  }
+
+  onAuthStateChanged(callback: any) {
+    return this.auth.onAuthStateChanged((user: FirebaseAuth.User | null) => {
+      callback(user);
+    });
   }
 
   async signInAnonny() {
-    const result = await FireBaseAuth.signInAnonymously(this.auth);
-    const user = result.user;
-    return user;
+    const result = await FirebaseAuth.signInAnonymously(this.auth);
   }
 
-  async goggleSignInWithPopup(): Promise<FireBaseAuth.User | null> {
+  async goggleSignInWithPopup(): Promise<FirebaseAuth.User | null> {
     try {
-      const result = await FireBaseAuth.signInWithPopup(
+      const result = await FirebaseAuth.signInWithPopup(
         this.auth,
         this.googleProvider
       );
       const credential =
-        FireBaseAuth.GoogleAuthProvider.credentialFromResult(result);
+        FirebaseAuth.GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       const user = result.user;
-      console.log(user);
       return user;
     } catch (error) {
       console.log("GoogleSignInError", error);
@@ -47,9 +50,9 @@ export class FirebaseWorker {
   }
 
   async signOutFromSite(): Promise<boolean> {
-    const auth = FireBaseAuth.getAuth();
+    const auth = FirebaseAuth.getAuth();
     try {
-      await FireBaseAuth.signOut(this.auth);
+      await FirebaseAuth.signOut(this.auth);
       return true;
     } catch (error) {
       console.log(error);
@@ -58,42 +61,39 @@ export class FirebaseWorker {
   }
 
   onRealTimeDataBase(callback: any) {
-    console.log("onvalue called");
-    return FireBaseDatabase.onValue(
-      FireBaseDatabase.ref(this.database, "/tracks/track1/comments"),
+    FirebaseDatabase.onValue(
+      FirebaseDatabase.ref(this.database, "/tracks"),
       (snapshot) => {
         const data = snapshot.val();
-        const string = new String("안녕");
-        console.log("getValue");
-        callback(string);
+        callback(data);
       }
     );
   }
 
   offRealTimeDataBase() {
-    FireBaseDatabase.off(
-      FireBaseDatabase.ref(this.database, "/tracks/track1/comments"),
+    FirebaseDatabase.off(
+      FirebaseDatabase.ref(this.database, "/tracks"),
       "value"
     );
   }
 
-  postData() {
-    FireBaseDatabase.push(
-      FireBaseDatabase.ref(this.database, "/tracks/track1/comments"),
+  postData(payload: PostDataPayload) {
+    const { title, comment, time } = payload;
+    FirebaseDatabase.push(
+      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments`),
       {
-        comment: "hello",
-        time: 10,
+        comment,
+        time,
         uid: this.auth.currentUser?.uid,
+        displayName: this.auth.currentUser?.displayName ?? "익명",
       }
     );
   }
 
-  deleteData() {
-    FireBaseDatabase.remove(
-      FireBaseDatabase.ref(
-        this.database,
-        "/tracks/track1/comments/-NQU_tBQypVLzsJli7j4"
-      )
+  deleteData(payload: { id: string; title: string }) {
+    const { id, title } = payload;
+    FirebaseDatabase.remove(
+      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments/${id}`)
     );
   }
 }

@@ -18,12 +18,16 @@ function ModalPortal({ children }: { children: JSX.Element }) {
 
 interface ModalBackDropProps {
   children: JSX.Element;
+  modalState: boolean;
   offModal: VoidFunction;
 }
 
-const ModalBackDrop = ({ children, offModal }: ModalBackDropProps) => {
-  console.log("backdrop");
-  return (
+const ModalBackDrop = ({
+  children,
+  offModal,
+  modalState,
+}: ModalBackDropProps) => {
+  return modalState ? (
     <ModalPortal>
       <div className={style.backdrop} onClick={offModal}>
         <div
@@ -35,7 +39,7 @@ const ModalBackDrop = ({ children, offModal }: ModalBackDropProps) => {
         </div>
       </div>
     </ModalPortal>
-  );
+  ) : null;
 };
 
 export default ModalBackDrop;

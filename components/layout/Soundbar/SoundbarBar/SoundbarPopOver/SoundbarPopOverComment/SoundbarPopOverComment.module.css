@@ -1,0 +1,24 @@
+.popOverComment {
+  position: absolute;
+  background: white;
+  padding: 1rem;
+  top: -3rem;
+}
+
+.popOverComment:hover .deleteButton {
+  opacity: 100%;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0%;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}

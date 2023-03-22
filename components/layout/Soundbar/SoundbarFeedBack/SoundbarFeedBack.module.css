@@ -1,0 +1,24 @@
+.feedbackContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feedbackControlerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  overflow: hidden;
+  cursor: pointer;
+}
