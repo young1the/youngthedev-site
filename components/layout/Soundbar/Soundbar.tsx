@@ -1,7 +1,5 @@
 "use client";
-import { firebase } from "@/lib/firebase";
-import { useFirebaseRealTimeDataBase } from "@/lib/firebase/hooks";
-import { useEffect, useState } from "react";
+import { useFirebaseRealTimeDataBase } from "@/lib/firebase";
 import style from "./Soundbar.module.css";
 import SoundbarBar from "./SoundbarBar/SoundbarBar";
 import SoundbarControlPanel from "./SoundbarControlPanel/SoundbarControlPanel";

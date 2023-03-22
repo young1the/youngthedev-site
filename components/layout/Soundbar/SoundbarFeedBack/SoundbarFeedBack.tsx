@@ -2,10 +2,8 @@ import style from "./SoundbarFeedBack.module.css";
 import { SoundbarProps } from "../Soundbar";
 import { ModalBackDrop, useModal } from "@/lib/modal";
 import LoginModal from "@/components/contents/LoginModal/LoginModal";
-import { firebase } from "@/lib/firebase";
-import { useEffect, useState } from "react";
 import CommentFormModal from "@/components/contents/CommentFormModal/CommentFormModal";
-import { useFirebaseOnAuthChange } from "@/lib/firebase/hooks";
+import { useFirebaseOnAuthChange } from "@/lib/firebase";
 
 interface SoundbarFeedBackProps
   extends Pick<SoundbarProps, "title" | "width"> {}
