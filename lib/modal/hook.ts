@@ -5,11 +5,11 @@ const useModal = (scrollLock = true) => {
   const on = useCallback(() => {
     setIsModalOn(true);
     scrollLock ? (document.body.style.overflow = "hidden") : null;
-  }, []);
+  }, [scrollLock]);
   const off = useCallback(() => {
     setIsModalOn(false);
     scrollLock ? document.body.style.removeProperty("overflow") : null;
-  }, []);
+  }, [scrollLock]);
   return { modalState: isModalOn, on, off };
 };
 
