@@ -1,5 +1,8 @@
 .feedbackContainer {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .feedbackControlerWrapper {
@@ -7,9 +10,15 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-.feedbackControlerWrapper:hover {
-  scale: 1.5;
+.avatar {
+  vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  overflow: hidden;
+  cursor: pointer;
 }

@@ -1,0 +1,18 @@
+.popOver {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1);
+  width: 1vw;
+  height: 100%;
+}
+
+.popOverComment {
+  position: absolute;
+  background: white;
+  padding: 1rem;
+  top: -3rem;
+  opacity: 0%;
+}
+
+.popOver:hover .popOverComment {
+  opacity: 100%;
+}

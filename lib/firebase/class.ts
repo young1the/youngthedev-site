@@ -19,18 +19,18 @@ export class FirebaseWorker {
   }
 
   getCurrentUser() {
-    return this.auth.currentUser;
+    return this.auth.currentUser?.uid;
   }
 
-  onAuthChange(callback: any) {
+  onAuthChangePhotoURL(callback: any) {
     return this.auth.onAuthStateChanged((user: FirebaseAuth.User | null) => {
       console.log(user);
       if (!user) {
-        callback("로그아웃");
+        callback("guest");
         return;
       }
-      const displayName = user?.displayName ?? "익명";
-      callback(displayName);
+      const photoURL = user.photoURL ?? "anonymous";
+      callback(photoURL);
     });
   }
 
@@ -96,7 +96,7 @@ export class FirebaseWorker {
     );
   }
 
-  deleteData(payload: any) {
+  deleteData(payload: { id: string; title: string }) {
     const { id, title } = payload;
     FirebaseDatabase.remove(
       FirebaseDatabase.ref(this.database, `/tracks/${title}/comments/${id}`)

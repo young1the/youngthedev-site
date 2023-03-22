@@ -3,11 +3,11 @@ import { firebase } from "@/lib/firebase";
 import { useEffect, useState } from "react";
 import style from "./Soundbar.module.css";
 import SoundbarBar from "./SoundbarBar/SoundbarBar";
-import SoundbarCommentsContainer from "./SoundbarCommentsContainer/SoundbarCommentsContainer";
 import SoundbarControlPanel from "./SoundbarControlPanel/SoundbarControlPanel";
 import SoundbarFeedBack from "./SoundbarFeedBack/SoundbarFeedBack";
 import SoundbarThumbnail from "./SoundbarThumbnail/SoundbarThumbnail";
 import SoundbarTitle from "./SoundbarTitle/SoundbarTitle";
+import { Tracks } from "./type";
 
 export interface SoundbarProps {
   width: number;
@@ -17,33 +17,32 @@ export interface SoundbarProps {
 }
 
 const Soundbar = (props: SoundbarProps) => {
-  const [user, setUser] = useState<any>(null);
+  const { title } = props;
+  const [tracks, setTracks] = useState<Tracks | null>(null);
   useEffect(() => {
-    // const onAuthChange = firebase.onAuthChange(setUser);
-    firebase.onRealTimeDataBase(setUser);
+    firebase.onRealTimeDataBase(setTracks);
     return () => {
-      // onAuthChange();
       firebase.offRealTimeDataBase();
     };
   }, []);
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    console.log(tracks);
+  }, [tracks]);
   const comments =
-    props.title !== "Loading" && user[props.title]
-      ? { ...user[props.title].comments }
-      : {};
+    tracks && tracks[title] ? { ...tracks[title].comments } : null;
   return (
     <div className={style.container}>
-      <div className={style.infoContainer}>
+      <div className={style.panelContainer}>
         <SoundbarThumbnail {...props} />
         <SoundbarTitle {...props} />
+      </div>
+      <div className={style.panelContainer}>
         <SoundbarFeedBack {...props} />
       </div>
-      <div className="test">{/* <div>{user}</div> */}</div>
-      <SoundbarControlPanel {...props} />
-      <SoundbarCommentsContainer {...props} comments={comments} />
-      <SoundbarBar {...props} />
+      <div className={style.panelContainer}>
+        <SoundbarControlPanel {...props} />
+      </div>
+      <SoundbarBar {...props} comments={comments} />
     </div>
   );
 };
