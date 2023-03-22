@@ -14,7 +14,7 @@ const SoundbarPopOver = (props: SoundbarPopOver) => {
   return (
     <>
       {memoizedComments.map((ele: MemoizedComment) => {
-        return <SoundbarPopOverLine memoizedComment={ele} />;
+        return <SoundbarPopOverLine key={ele.id} memoizedComment={ele} />;
       })}
       {memoizedComments[popOverIndex] ? (
         <SoundbarPopOverComment
