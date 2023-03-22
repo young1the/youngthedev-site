@@ -5,35 +5,34 @@ import LoginModal from "@/components/contents/LoginModal/LoginModal";
 import { firebase } from "@/lib/firebase";
 import { useEffect, useState } from "react";
 import CommentFormModal from "@/components/contents/CommentFormModal/CommentFormModal";
+import { useFirebaseOnAuthChange } from "@/lib/firebase/hooks";
 
 interface SoundbarFeedBackProps
   extends Pick<SoundbarProps, "title" | "width"> {}
 
 const SoundbarFeedBack = (props: SoundbarFeedBackProps) => {
-  const [user, setUser] = useState<string>("guest");
-  useEffect(() => {
-    const offAuthChange = firebase.onAuthChangePhotoURL(setUser);
-    return () => {
-      offAuthChange();
-    };
-  }, []);
+  const { user } = useFirebaseOnAuthChange();
   const {
     on: loginPopUpOn,
     off: loginPopUpoff,
     modalState: loginPopUpState,
   } = useModal(false);
   const { on, off, modalState } = useModal(false);
-
+  const userState = !user ? "guest" : !user.photoURL ? "hamster" : "user";
   return (
     <>
       <div className={style.feedbackContainer}>
         <div onClick={loginPopUpOn}>
-          {user === "anonymous" ? (
-            <div className={style.avatar}>🐹</div>
-          ) : user === "guest" ? (
+          {userState === "user" ? (
+            <img
+              className={style.avatar}
+              src={user?.photoURL as string}
+              alt="user avatar"
+            />
+          ) : userState === "guest" ? (
             <img className={style.avatar} src="./login.png" alt="need Login" />
           ) : (
-            <img className={style.avatar} src={user} alt="user avatar" />
+            <div className={style.avatar}>🐹</div>
           )}
         </div>
         <div className={style.feedbackControlerWrapper} onClick={on}>
@@ -41,10 +40,10 @@ const SoundbarFeedBack = (props: SoundbarFeedBackProps) => {
         </div>
       </div>
       <ModalBackDrop modalState={modalState} offModal={off}>
-        {user === "guest" ? (
+        {userState === "guest" ? (
           <LoginModal />
         ) : (
-          <CommentFormModal {...props} user={user} />
+          <CommentFormModal {...props} user={userState} />
         )}
       </ModalBackDrop>
       <ModalBackDrop modalState={loginPopUpState} offModal={loginPopUpoff}>

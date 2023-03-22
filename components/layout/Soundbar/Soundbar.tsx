@@ -1,5 +1,6 @@
 "use client";
 import { firebase } from "@/lib/firebase";
+import { useFirebaseRealTimeDataBase } from "@/lib/firebase/hooks";
 import { useEffect, useState } from "react";
 import style from "./Soundbar.module.css";
 import SoundbarBar from "./SoundbarBar/SoundbarBar";
@@ -18,16 +19,7 @@ export interface SoundbarProps {
 
 const Soundbar = (props: SoundbarProps) => {
   const { title } = props;
-  const [tracks, setTracks] = useState<Tracks | null>(null);
-  useEffect(() => {
-    firebase.onRealTimeDataBase(setTracks);
-    return () => {
-      firebase.offRealTimeDataBase();
-    };
-  }, []);
-  useEffect(() => {
-    console.log(tracks);
-  }, [tracks]);
+  const { data: tracks } = useFirebaseRealTimeDataBase<Tracks>();
   const comments =
     tracks && tracks[title] ? { ...tracks[title].comments } : null;
   return (

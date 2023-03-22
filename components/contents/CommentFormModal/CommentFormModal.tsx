@@ -24,11 +24,11 @@ const CommentFormModal = (props: CommentFormModalProps) => {
         type="text"
         value={comment}
         onChange={(e) => {
-          if (user === "anonymous") return;
+          if (user === "hamster") return;
           setComment(e.target.value);
         }}
       />
-      {user === "anonymous" ? (
+      {user === "hamster" ? (
         <div>
           <div
             onClick={() => {

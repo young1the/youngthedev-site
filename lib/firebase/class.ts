@@ -22,15 +22,9 @@ export class FirebaseWorker {
     return this.auth.currentUser?.uid;
   }
 
-  onAuthChangePhotoURL(callback: any) {
+  onAuthStateChanged(callback: any) {
     return this.auth.onAuthStateChanged((user: FirebaseAuth.User | null) => {
-      console.log(user);
-      if (!user) {
-        callback("guest");
-        return;
-      }
-      const photoURL = user.photoURL ?? "anonymous";
-      callback(photoURL);
+      callback(user);
     });
   }
 
@@ -67,7 +61,7 @@ export class FirebaseWorker {
   }
 
   onRealTimeDataBase(callback: any) {
-    return FirebaseDatabase.onValue(
+    FirebaseDatabase.onValue(
       FirebaseDatabase.ref(this.database, "/tracks"),
       (snapshot) => {
         const data = snapshot.val();
