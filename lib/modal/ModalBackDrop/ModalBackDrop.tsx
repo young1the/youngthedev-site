@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./ModalBackDrop.module.css";
 
@@ -18,18 +18,24 @@ function ModalPortal({ children }: { children: JSX.Element }) {
 
 interface ModalBackDropProps {
   children: JSX.Element;
-  modalState: boolean;
-  offModal: VoidFunction;
+  state: boolean;
+  off?: VoidFunction;
+  opacity?: number;
 }
 
 const ModalBackDrop = ({
   children,
-  offModal,
-  modalState,
+  state,
+  off = () => {},
+  opacity = 0.5,
 }: ModalBackDropProps) => {
-  return modalState ? (
+  return state ? (
     <ModalPortal>
-      <div className={style.backdrop} onClick={offModal}>
+      <div
+        className={style.backdrop}
+        style={{ backgroundColor: `rgba(0, 0, 0, ${opacity})` }}
+        onClick={off}
+      >
         <div
           onClick={(e) => {
             e.stopPropagation();
@@ -42,4 +48,4 @@ const ModalBackDrop = ({
   ) : null;
 };
 
-export default ModalBackDrop;
+export default memo(ModalBackDrop);
