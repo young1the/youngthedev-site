@@ -10,7 +10,7 @@ const useModal = (scrollLock = true) => {
     setIsModalOn(false);
     scrollLock ? document.body.style.removeProperty("overflow") : null;
   }, [scrollLock]);
-  return { modalState: isModalOn, on, off };
+  return { state: isModalOn, on, off };
 };
 
 export default useModal;
