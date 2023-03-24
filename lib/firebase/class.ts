@@ -6,57 +6,60 @@ import { FirebaseConfig, PostDataPayload } from "./types";
 export class FirebaseWorker {
   private config: FirebaseConfig;
   private app: FirebaseApp.FirebaseApp;
-  private googleProvider: FirebaseAuth.GoogleAuthProvider;
-  private auth: FirebaseAuth.Auth;
   private database: FirebaseDatabase.Database;
 
   constructor(initConfig: FirebaseConfig) {
     this.config = { ...initConfig };
     this.app = FirebaseApp.initializeApp(this.config);
-    this.googleProvider = new FirebaseAuth.GoogleAuthProvider();
-    this.auth = FirebaseAuth.getAuth();
     this.database = FirebaseDatabase.getDatabase();
   }
 
   getCurrentUser() {
-    return this.auth.currentUser?.uid;
+    return FirebaseAuth.getAuth().currentUser?.uid;
   }
 
   onAuthStateChanged(callback: any) {
-    return this.auth.onAuthStateChanged((user: FirebaseAuth.User | null) => {
-      callback(user);
-    });
+    return FirebaseAuth.getAuth().onAuthStateChanged(
+      (user: FirebaseAuth.User | null) => {
+        callback(user);
+      }
+    );
   }
 
-  async signInAnonny() {
-    const result = await FirebaseAuth.signInAnonymously(this.auth);
-  }
-
-  async goggleSignInWithPopup(): Promise<FirebaseAuth.User | null> {
+  async signInAnonny(): Promise<string> {
     try {
-      const result = await FirebaseAuth.signInWithPopup(
-        this.auth,
-        this.googleProvider
+      const result = await FirebaseAuth.signInAnonymously(
+        FirebaseAuth.getAuth()
       );
-      const credential =
-        FirebaseAuth.GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      const user = result.user;
-      return user;
-    } catch (error) {
-      console.log("GoogleSignInError", error);
-      return null;
+      return "익명로그인에 성공했습니다.";
+    } catch {
+      throw new Error("익명로그인에 실패했습니다.");
     }
   }
 
-  async signOutFromSite(): Promise<boolean> {
+  async goggleSignInWithPopup(): Promise<string> {
+    const googleProvider = new FirebaseAuth.GoogleAuthProvider();
+    try {
+      const result = await FirebaseAuth.signInWithPopup(
+        FirebaseAuth.getAuth(),
+        googleProvider
+      );
+      FirebaseAuth.GoogleAuthProvider.credentialFromResult(result);
+      const user = result.user;
+      return `${user.displayName}님 안녕하세요!`;
+    } catch (error: any) {
+      FirebaseAuth.GoogleAuthProvider.credentialFromError(error);
+      throw new Error("구글로그인에 실패했습니다.");
+    }
+  }
+
+  async signOutFromSite(): Promise<string> {
     const auth = FirebaseAuth.getAuth();
     try {
-      await FirebaseAuth.signOut(this.auth);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
+      await FirebaseAuth.signOut(FirebaseAuth.getAuth());
+      return "로그아웃에 성공했습니다.";
+    } catch {
+      return "로그아웃에 실패했습니다.";
     }
   }
 
@@ -77,15 +80,15 @@ export class FirebaseWorker {
     );
   }
 
-  postData(payload: PostDataPayload) {
+  async postData(payload: PostDataPayload) {
     const { title, comment, time } = payload;
-    FirebaseDatabase.push(
+    await FirebaseDatabase.push(
       FirebaseDatabase.ref(this.database, `/tracks/${title}/comments`),
       {
         comment,
         time,
-        uid: this.auth.currentUser?.uid,
-        displayName: this.auth.currentUser?.displayName ?? "익명",
+        uid: FirebaseAuth.getAuth().currentUser?.uid,
+        displayName: FirebaseAuth.getAuth().currentUser?.displayName ?? "익명",
       }
     );
   }
