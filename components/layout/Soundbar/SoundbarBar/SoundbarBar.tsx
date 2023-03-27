@@ -4,12 +4,12 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import SoundbarPopOver from "./SoundbarPopOver/SoundbarPopOver";
 import { Comment, Comments, MemoizedComment } from "../type";
 
-interface SoundbarBarProps extends Pick<SoundbarProps, "width" | "title"> {
+interface SoundbarBarProps extends Pick<SoundbarProps, "width" | "titleIndex"> {
   comments: Comments | null;
 }
 
 const SoundbarBar = (props: SoundbarBarProps) => {
-  const { width, comments, title } = props;
+  const { width, comments, titleIndex } = props;
   const memoizedComments = useMemo<MemoizedComment[] | null>(() => {
     if (!comments) return null;
     const memo: MemoizedComment[] = Object.keys(comments)
@@ -43,7 +43,7 @@ const SoundbarBar = (props: SoundbarBarProps) => {
       <SoundbarPopOver
         memoizedComments={memoizedComments}
         popOverIndex={popOverIndex}
-        title={title}
+        titleIndex={titleIndex}
       />
     </div>
   );

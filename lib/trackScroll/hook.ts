@@ -1,31 +1,42 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+// const InitialState = {
+//   soundbarWidth: 0,
+//   currentTitle: "",
+//   titleIndex: 0,
+//   trackRefs: null,
+//   onPlayClickHandler: () => {},
+//   onNextClickHandler: () => {},
+//   onPrevClickHandler: () => {},
+// };
 
 const useTrackScroll = (trackList: string[]) => {
   const [scrollY, setScrollY] = useState(-300);
-  const [titleIndex, setTitleIndex] = useState(-1);
-  const [soundbarWidth, setSoundbarWidth] = useState(0);
+  const innerHeight = useRef(0);
   const trackRefs = useRef<(HTMLDivElement | null)[]>([]);
-
   useEffect(() => {
     const scrollEventHandler = () => {
       setScrollY(window.scrollY - 300);
     };
+    innerHeight.current = window.innerHeight;
     addEventListener("scroll", scrollEventHandler);
     return () => {
       removeEventListener("scroll", scrollEventHandler);
     };
   }, []);
 
-  useEffect(() => {
-    const elementHeight = window.innerHeight * 2;
+  const getSubState = useCallback((scrollY: number) => {
+    const elementHeight = innerHeight.current * 2;
     const newIndex = Math.floor(scrollY / elementHeight);
     const lastArticlePad = newIndex === trackList.length - 1 ? 100 : 0;
     const scrolled = elementHeight * newIndex;
     const scrolledRatio = (scrollY + lastArticlePad - scrolled) / elementHeight;
     const newWidth = Math.ceil(scrolledRatio * 100);
-    setTitleIndex(newIndex);
-    setSoundbarWidth(newWidth);
-  }, [scrollY, trackList.length]);
+    return { newIndex, newWidth };
+  }, []);
+
+  const { newIndex: titleIndex, newWidth: soundbarWidth } =
+    getSubState(scrollY);
 
   const moveToDivElement = (element: HTMLDivElement | null) => {
     if (element) {
@@ -50,6 +61,7 @@ const useTrackScroll = (trackList: string[]) => {
   return {
     soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,
     currentTitle: titleIndex < 0 ? "Loading" : trackList[titleIndex],
+    titleIndex,
     trackRefs,
     onPlayClickHandler,
     onNextClickHandler,

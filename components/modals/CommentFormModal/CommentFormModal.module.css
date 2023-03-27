@@ -1,5 +1,20 @@
 .wrapper {
   width: 30rem;
-  height: 20rem;
   background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.inputWrapper {
+  width: 100%;
 }

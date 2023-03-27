@@ -8,7 +8,7 @@ import UserAvatar from "@/components/contents/UserAvatar/UserAvatar";
 import { memo, useEffect, useMemo } from "react";
 
 interface SoundbarFeedBackProps
-  extends Pick<SoundbarProps, "title" | "width"> {}
+  extends Pick<SoundbarProps, "title" | "titleIndex" | "width"> {}
 
 const SoundbarFeedBack = (props: SoundbarFeedBackProps) => {
   const { user } = useFirebaseOnAuthChange();
@@ -16,12 +16,12 @@ const SoundbarFeedBack = (props: SoundbarFeedBackProps) => {
     on: loginPopUpOn,
     off: loginPopUpOff,
     state: loginPopUpState,
-  } = useModal(false);
+  } = useModal();
   const {
     on: commentFormOn,
     off: commentFormOff,
     state: commentFormState,
-  } = useModal(false);
+  } = useModal();
   return (
     <>
       <div className={style.feedbackContainer}>

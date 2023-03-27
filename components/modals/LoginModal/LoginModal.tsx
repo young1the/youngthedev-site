@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import LoginButtonContainer from "./LoginButtonContainer";
+import LoginButtonContainer from "./LoginButtonContainer/LoginButtonContainer";
 import style from "./LoginModal.module.css";
 
 export interface LoginModalProps {

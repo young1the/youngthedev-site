@@ -1,0 +1,20 @@
+.loginButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  font-size: 1rem;
+  height: 4rem;
+  border: 1px solid #bfc0c6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logoImg {
+  justify-self: flex-start;
+  width: 2rem;
+  height: 2rem;
+}

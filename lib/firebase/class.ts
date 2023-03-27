@@ -81,9 +81,9 @@ export class FirebaseWorker {
   }
 
   async postData(payload: PostDataPayload) {
-    const { title, comment, time } = payload;
+    const { titleIndex, comment, time } = payload;
     await FirebaseDatabase.push(
-      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments`),
+      FirebaseDatabase.ref(this.database, `/tracks/${titleIndex}/comments`),
       {
         comment,
         time,
@@ -93,10 +93,13 @@ export class FirebaseWorker {
     );
   }
 
-  deleteData(payload: { id: string; title: string }) {
-    const { id, title } = payload;
+  deleteData(payload: { id: string; titleIndex: number }) {
+    const { id, titleIndex } = payload;
     FirebaseDatabase.remove(
-      FirebaseDatabase.ref(this.database, `/tracks/${title}/comments/${id}`)
+      FirebaseDatabase.ref(
+        this.database,
+        `/tracks/${titleIndex}/comments/${id}`
+      )
     );
   }
 }

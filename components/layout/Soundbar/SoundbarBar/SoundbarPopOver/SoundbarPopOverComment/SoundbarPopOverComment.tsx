@@ -5,13 +5,12 @@ import { firebase } from "@/lib/firebase";
 
 interface SoundbarPopOverCommentProps {
   memoizedComment: MemoizedComment;
-  title: string;
+  titleIndex: number;
 }
 
 const SoundbarPopOverComment = (props: SoundbarPopOverCommentProps) => {
-  const { memoizedComment, title } = props;
+  const { memoizedComment, titleIndex } = props;
   const { time, displayName, comment, uid, id } = memoizedComment;
-
   return (
     <div className={style.popOverComment} style={{ left: `${time}vw` }}>
       {displayName}
@@ -21,7 +20,8 @@ const SoundbarPopOverComment = (props: SoundbarPopOverCommentProps) => {
         <div
           className={style.deleteButton}
           onClick={() => {
-            firebase.deleteData({ id, title });
+            console.log(titleIndex);
+            firebase.deleteData({ id, titleIndex });
           }}
         >
           ❌

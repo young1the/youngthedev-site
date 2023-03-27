@@ -3,13 +3,13 @@ import { MemoizedComment } from "../../type";
 import SoundbarPopOverComment from "./SoundbarPopOverComment/SoundbarPopOverComment";
 import SoundbarPopOverLine from "./SoundbarPopOverLine/SoundbarPopOverLine";
 
-interface SoundbarPopOver extends Pick<SoundbarProps, "title"> {
+interface SoundbarPopOver extends Pick<SoundbarProps, "titleIndex"> {
   memoizedComments: MemoizedComment[] | null;
   popOverIndex: number;
 }
 
 const SoundbarPopOver = (props: SoundbarPopOver) => {
-  const { memoizedComments, title, popOverIndex } = props;
+  const { memoizedComments, titleIndex, popOverIndex } = props;
   if (!memoizedComments) return null;
   return (
     <>
@@ -19,7 +19,7 @@ const SoundbarPopOver = (props: SoundbarPopOver) => {
       {memoizedComments[popOverIndex] ? (
         <SoundbarPopOverComment
           memoizedComment={memoizedComments[popOverIndex]}
-          title={title}
+          titleIndex={titleIndex}
         />
       ) : null}
     </>

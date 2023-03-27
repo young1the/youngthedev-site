@@ -1,0 +1,88 @@
+.container {
+  width: 100%;
+  display: flex;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.anonyInput {
+  width: 20rem;
+  height: 10rem;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 4px;
+  gap: 2rem;
+}
+
+.anonyButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.anonyButton {
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.input {
+  flex: 2;
+  font-size: 1rem;
+  padding: 1rem;
+  width: 100%;
+  border: none;
+}
+
+.send {
+  flex: 0;
+  border: none;
+  background-color: white;
+}
+
+.input:focus .send {
+  background-color: red;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.bar {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+}
+.bar:before,
+.bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: #f50;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.bar:before {
+  left: 50%;
+}
+.bar:after {
+  right: 50%;
+}
+.input:focus ~ .bar:before,
+.input:focus ~ .bar:after {
+  width: 50%;
+}

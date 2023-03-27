@@ -11,15 +11,16 @@ import { Tracks } from "./type";
 export interface SoundbarProps {
   width: number;
   title: string;
+  titleIndex: number;
   onPrevClickHandler: VoidFunction;
   onNextClickHandler: VoidFunction;
 }
 
 const Soundbar = (props: SoundbarProps) => {
-  const { title } = props;
+  const { titleIndex } = props;
   const { data: tracks } = useFirebaseRealTimeDataBase<Tracks>();
   const comments =
-    tracks && tracks[title] ? { ...tracks[title].comments } : null;
+    tracks && tracks[titleIndex] ? { ...tracks[titleIndex].comments } : null;
   return (
     <div className={style.container}>
       <div className={style.panelContainer}>
