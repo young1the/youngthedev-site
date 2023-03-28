@@ -7,3 +7,9 @@
   overflow: hidden;
   cursor: pointer;
 }
+
+.login {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}

@@ -34,6 +34,7 @@ export default function Home({ notionCMS, trackList }: HomeProps) {
     soundbarWidth,
     currentTitle,
     trackRefs,
+    titleIndex,
     onPlayClickHandler,
     onNextClickHandler,
     onPrevClickHandler,
@@ -55,6 +56,7 @@ export default function Home({ notionCMS, trackList }: HomeProps) {
         <Soundbar
           width={soundbarWidth}
           title={currentTitle}
+          titleIndex={titleIndex}
           onNextClickHandler={onNextClickHandler}
           onPrevClickHandler={onPrevClickHandler}
         />

@@ -8,7 +8,7 @@ export type FirebaseConfig = {
 };
 
 export type PostDataPayload = {
-  title: string;
+  titleIndex: number;
   comment: string;
   time: number;
 };

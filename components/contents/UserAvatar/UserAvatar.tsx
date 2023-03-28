@@ -19,9 +19,9 @@ const UserAvatar = (props: UserAvatarProps) => {
         />
       ) : userState === "guest" ? (
         <img
-          className={style.avatar}
+          className={style.login}
           style={{ background: "white" }}
-          src="./login.png"
+          src="./login.svg"
           alt="need Login"
         />
       ) : (
