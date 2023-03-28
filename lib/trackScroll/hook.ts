@@ -25,15 +25,19 @@ const useTrackScroll = (trackList: string[]) => {
     };
   }, []);
 
-  const getSubState = useCallback((scrollY: number) => {
-    const elementHeight = innerHeight.current * 2;
-    const newIndex = Math.floor(scrollY / elementHeight);
-    const lastArticlePad = newIndex === trackList.length - 1 ? 100 : 0;
-    const scrolled = elementHeight * newIndex;
-    const scrolledRatio = (scrollY + lastArticlePad - scrolled) / elementHeight;
-    const newWidth = Math.ceil(scrolledRatio * 100);
-    return { newIndex, newWidth };
-  }, []);
+  const getSubState = useCallback(
+    (scrollY: number) => {
+      const elementHeight = innerHeight.current * 2;
+      const newIndex = Math.floor(scrollY / elementHeight);
+      const lastArticlePad = newIndex === trackList.length - 1 ? 100 : 0;
+      const scrolled = elementHeight * newIndex;
+      const scrolledRatio =
+        (scrollY + lastArticlePad - scrolled) / elementHeight;
+      const newWidth = Math.ceil(scrolledRatio * 100);
+      return { newIndex, newWidth };
+    },
+    [trackList.length]
+  );
 
   const { newIndex: titleIndex, newWidth: soundbarWidth } =
     getSubState(scrollY);

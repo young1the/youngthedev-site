@@ -40,7 +40,7 @@ const CommentFormModal = (props: CommentFormModalProps) => {
   return (
     <>
       <div className={style.wrapper}>
-        "{title}" 에 대해 피드백을 남겨주세요!
+        {`"${title}" 에 대해 피드백을 남겨주세요!`}
         <form
           className={style.container}
           onSubmit={(e) => {

@@ -9,18 +9,21 @@ import { useCallback } from "react";
 const LoginButtonContainer = (props: LoginModalProps) => {
   const { parentModalOff, user } = props;
   const { state, on, off } = useModal(true);
-  const LoginHandler = useCallback(async (signWith: string) => {
-    on();
-    try {
-      if (signWith === "google") await firebase.goggleSignInWithPopup();
-      else if (signWith === "anony") await firebase.signInAnonny();
-      else if (signWith === "logout") await firebase.signOutFromSite();
-      parentModalOff();
-    } catch {
-    } finally {
-      off();
-    }
-  }, []);
+  const LoginHandler = useCallback(
+    async (signWith: string) => {
+      on();
+      try {
+        if (signWith === "google") await firebase.goggleSignInWithPopup();
+        else if (signWith === "anony") await firebase.signInAnonny();
+        else if (signWith === "logout") await firebase.signOutFromSite();
+        parentModalOff();
+      } catch {
+      } finally {
+        off();
+      }
+    },
+    [on, off, parentModalOff]
+  );
 
   return (
     <>

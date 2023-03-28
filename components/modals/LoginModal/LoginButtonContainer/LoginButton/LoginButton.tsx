@@ -15,7 +15,11 @@ const LoginButton = (props: LoginButtonProps) => {
         loginHandler(id);
       }}
     >
-      <img className={style.logoImg} src={`./auth/${id}.svg`}></img>
+      <img
+        className={style.logoImg}
+        alt="login button"
+        src={`./auth/${id}.svg`}
+      ></img>
       <div>{label}</div>
     </button>
   );
