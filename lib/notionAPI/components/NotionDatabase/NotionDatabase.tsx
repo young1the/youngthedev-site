@@ -14,11 +14,7 @@ const NotionDatabase = ({ content }: NotionDatabaseProps) => {
       rel="noopener noreferrer"
     >
       <div className={style.imageContainer}>
-        <img
-          src={content.cover}
-          alt="thumbnail"
-          style={{ width: "100%", height: "100%" }}
-        />
+        <img src={content.cover} alt="thumbnail" className={style.thumbnail} />
       </div>
       <div className={style.infoContainer}>
         <h1>{content.properties.이름.title[0].plain_text}</h1>
