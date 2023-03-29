@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { SoundbarProps } from "../../Soundbar";
 import { MemoizedComment } from "../../type";
 import SoundbarPopOverComment from "./SoundbarPopOverComment/SoundbarPopOverComment";
@@ -11,11 +12,14 @@ interface SoundbarPopOver extends Pick<SoundbarProps, "titleIndex"> {
 const SoundbarPopOver = (props: SoundbarPopOver) => {
   const { memoizedComments, titleIndex, popOverIndex } = props;
   if (!memoizedComments) return null;
+  const comments = useMemo(() => {
+    return memoizedComments.map((ele: MemoizedComment) => {
+      return <SoundbarPopOverLine key={ele.id} memoizedComment={ele} />;
+    });
+  }, [memoizedComments]);
   return (
     <>
-      {memoizedComments.map((ele: MemoizedComment) => {
-        return <SoundbarPopOverLine key={ele.id} memoizedComment={ele} />;
-      })}
+      {comments}
       {memoizedComments[popOverIndex] ? (
         <SoundbarPopOverComment
           memoizedComment={memoizedComments[popOverIndex]}

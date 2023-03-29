@@ -42,25 +42,25 @@ const useTrackScroll = (trackList: string[]) => {
   const { newIndex: titleIndex, newWidth: soundbarWidth } =
     getSubState(scrollY);
 
-  const moveToDivElement = (element: HTMLDivElement | null) => {
+  const moveToDivElement = useCallback((element: HTMLDivElement | null) => {
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     }
-  };
-  const onPlayClickHandler = () => {
+  }, []);
+  const onPlayClickHandler = useCallback(() => {
     moveToDivElement(trackRefs.current[0]);
-  };
-  const onNextClickHandler = () => {
+  }, []);
+  const onNextClickHandler = useCallback(() => {
     const nextIndex = Math.min(titleIndex + 1, trackList.length - 1);
     moveToDivElement(trackRefs.current[nextIndex]);
-  };
-  const onPrevClickHandler = () => {
+  }, []);
+  const onPrevClickHandler = useCallback(() => {
     const prevIndex = Math.max(titleIndex - 1, 0);
     moveToDivElement(trackRefs.current[prevIndex]);
-  };
+  }, []);
 
   return {
     soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,

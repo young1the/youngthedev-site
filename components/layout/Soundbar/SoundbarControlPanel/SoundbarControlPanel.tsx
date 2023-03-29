@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import style from "./SoundbarControlPanel.module.css";
 
 import { SoundbarProps } from "../Soundbar";
@@ -22,15 +22,23 @@ const SoundbarControlPanel = (props: SoundbarControlPanelProps) => {
     return `${paddedHours}:${paddedMinutes}`;
   }, []);
 
+  const controlButtons = useMemo(() => {
+    return (
+      <>
+        <div onClick={onPrevClickHandler} className={style.controlButton}>
+          {"<<"}
+        </div>
+        <div onClick={onNextClickHandler} className={style.controlButton}>
+          {">>"}
+        </div>
+      </>
+    );
+  }, [onPrevClickHandler, onNextClickHandler]);
+
   return (
     <div className={style.controlContainer}>
       <div className={style.timeLine}>{convertToTime(width)}</div>
-      <div onClick={onPrevClickHandler} className={style.controlButton}>
-        {"<<"}
-      </div>
-      <div onClick={onNextClickHandler} className={style.controlButton}>
-        {">>"}
-      </div>
+      {controlButtons}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import style from "./SoundbarBar.module.css";
 import { SoundbarProps } from "../Soundbar";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import SoundbarPopOver from "./SoundbarPopOver/SoundbarPopOver";
 import { Comment, Comments, MemoizedComment } from "../type";
 
@@ -49,4 +49,4 @@ const SoundbarBar = (props: SoundbarBarProps) => {
   );
 };
 
-export default SoundbarBar;
+export default memo(SoundbarBar);

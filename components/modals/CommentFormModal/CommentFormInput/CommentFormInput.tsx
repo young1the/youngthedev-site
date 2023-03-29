@@ -37,6 +37,7 @@ export const AnonyInput = (props: CommentFormInputProps) => {
         value={comment}
         className={style.input}
         required
+        readOnly={true}
         onClick={on}
       ></input>
       <button type="submit" className={style.send}>

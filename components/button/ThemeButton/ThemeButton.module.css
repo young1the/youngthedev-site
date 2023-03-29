@@ -10,6 +10,9 @@
 }
 
 .star {
+  -webkit-filter: invert(var(--invert));
+  -ms-filter: invert(var(--invert));
+  -o-filter: invert(var(--invert));
   filter: invert(var(--invert));
 }
 
