@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import style from "./SoundbarPopOverComment.module.css";
 import { MemoizedComment } from "../../../type";
 import { firebase } from "@/lib/firebase";
@@ -36,4 +36,4 @@ const SoundbarPopOverComment = (props: SoundbarPopOverCommentProps) => {
   );
 };
 
-export default SoundbarPopOverComment;
+export default memo(SoundbarPopOverComment);

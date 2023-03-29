@@ -2,6 +2,7 @@ import style from "./Hero.module.css";
 import Marquee from "../Marquee/Marquee";
 import Button from "@/components/button/Button/Button";
 import TrackList from "../TrackList/TrackList";
+import { memo } from "react";
 
 interface HeroProps {
   onClick: VoidFunction;
@@ -45,4 +46,4 @@ const Hero = ({ onClick, trackList }: HeroProps) => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

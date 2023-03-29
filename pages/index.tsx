@@ -12,6 +12,8 @@ import Hero from "@/components/contents/Hero/Hero";
 import Soundbar from "@/components/layout/Soundbar/Soundbar";
 import Article from "@/components/contents/Article/Article";
 import Title from "@/components/text/Title/Title";
+import { useMemo } from "react";
+import NotionArticles from "@/components/contents/NotionArticles/NotionArticles";
 
 interface HomeProps {
   notionCMS: NotionData[];
@@ -39,6 +41,7 @@ export default function Home({ notionCMS, trackList }: HomeProps) {
     onNextClickHandler,
     onPrevClickHandler,
   } = useTrackScroll(trackList);
+
   return (
     <>
       <Head>
@@ -60,33 +63,7 @@ export default function Home({ notionCMS, trackList }: HomeProps) {
           onNextClickHandler={onNextClickHandler}
           onPrevClickHandler={onPrevClickHandler}
         />
-        {notionCMS.map((data, index) => {
-          let content;
-          if (data.type === "child_page") {
-            content = (
-              <NotionPageRenderer
-                key={data.id + "content"}
-                content={data.content as Page[]}
-              />
-            );
-          } else {
-            content = (
-              <NotionDatabaseRenderer
-                key={data.id + "content"}
-                content={data.content as Database[]}
-              />
-            );
-          }
-          return (
-            <Article
-              key={data.id}
-              ref={(ref) => (trackRefs.current[index] = ref)}
-            >
-              <Title key={data.id + "title"} value={data.title} />
-              {content}
-            </Article>
-          );
-        })}
+        <NotionArticles notionCMS={notionCMS} trackRefs={trackRefs} />
       </div>
     </>
   );

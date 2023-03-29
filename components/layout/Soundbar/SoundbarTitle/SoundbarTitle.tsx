@@ -1,5 +1,6 @@
 import style from "./SoundbarTitle.module.css";
 import { SoundbarProps } from "../Soundbar";
+import { memo } from "react";
 
 interface SoundbarTitleProps extends Pick<SoundbarProps, "title"> {}
 
@@ -14,4 +15,4 @@ const SoundbarTitle = (props: SoundbarTitleProps) => {
   );
 };
 
-export default SoundbarTitle;
+export default memo(SoundbarTitle);

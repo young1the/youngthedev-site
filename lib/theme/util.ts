@@ -14,3 +14,18 @@ export const getInitialIndexState = (): number => {
   }
   return -1; // never
 };
+
+export const ascii = () => {
+  console.log("             .     .");
+  console.log("            (>---/<)");
+  console.log("            ,'     `.");
+  console.log("           /  q   p  \\");
+  console.log("          (  >(_Y_)<  )");
+  console.log("           >-' `-' `-<-.");
+  console.log("          /  _.== ,=.,- \\");
+  console.log("         /,    )`  '(    )");
+  console.log("        ; `._.'      `--<");
+  console.log("       :     \\        |  )");
+  console.log("       \\      )       ;_/ ");
+  console.log("        `._ _/_  ___.'-\\\\\\");
+};
