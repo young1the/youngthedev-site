@@ -20,11 +20,8 @@ export interface SoundbarProps {
 const Soundbar = (props: SoundbarProps) => {
   const { titleIndex } = props;
   const { data: tracks } = useFirebaseRealTimeDataBase<Tracks>();
-  const comments = useMemo(() => {
-    return tracks && tracks[titleIndex]
-      ? { ...tracks[titleIndex].comments }
-      : null;
-  }, [titleIndex]);
+  const comments =
+    tracks && tracks[titleIndex] ? { ...tracks[titleIndex].comments } : null;
   return (
     <div className={style.container}>
       <div className={style.panelContainer}>
