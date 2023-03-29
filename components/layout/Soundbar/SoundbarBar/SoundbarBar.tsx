@@ -49,4 +49,4 @@ const SoundbarBar = (props: SoundbarBarProps) => {
   );
 };
 
-export default memo(SoundbarBar);
+export default SoundbarBar;
