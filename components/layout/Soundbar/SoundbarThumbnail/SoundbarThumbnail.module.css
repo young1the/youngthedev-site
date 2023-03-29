@@ -3,3 +3,9 @@
   height: 2rem;
   position: relative;
 }
+
+@media screen and (max-width: 767px) {
+  .infoThumbnail {
+    display: none;
+  }
+}

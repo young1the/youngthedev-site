@@ -3,14 +3,12 @@ import style from "./NotionLink.module.css";
 
 interface NotionLinkProps {
   content: LinkPreviewType;
-  width?: number;
 }
-const NotionLink = ({ content, width = 100 }: NotionLinkProps) => {
+const NotionLink = ({ content }: NotionLinkProps) => {
   return (
     <a
       href={content.url}
       className={style.link}
-      style={{ width: `${width}%` }}
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -22,7 +20,9 @@ const NotionLink = ({ content, width = 100 }: NotionLinkProps) => {
           alt="github"
         />
       </div>
-      {content.url}
+      <div className={style.description}>
+        <p className={style.linkText}>{content.url}</p>
+      </div>
     </a>
   );
 };

@@ -11,20 +11,25 @@ interface SoundbarPopOverCommentProps {
 const SoundbarPopOverComment = (props: SoundbarPopOverCommentProps) => {
   const { memoizedComment, titleIndex } = props;
   const { time, displayName, comment, uid, id } = memoizedComment;
+  const position = `${time > 50 ? 100 - time : time}vw`;
+  const dynamicStyle = {
+    left: time <= 50 ? position : "",
+    right: time > 50 ? position : "",
+  };
   return (
-    <div className={style.popOverComment} style={{ left: `${time}vw` }}>
+    <div className={style.popOverComment} style={dynamicStyle}>
       {displayName}
       {" : "}
       {comment}
       {firebase.getCurrentUser() === uid ? (
-        <div
-          className={style.deleteButton}
-          onClick={() => {
-            console.log(titleIndex);
-            firebase.deleteData({ id, titleIndex });
-          }}
-        >
-          ❌
+        <div className={style.deleteButton}>
+          <div
+            onClick={() => {
+              firebase.deleteData({ id, titleIndex });
+            }}
+          >
+            ❌
+          </div>
         </div>
       ) : null}
     </div>
