@@ -78,7 +78,7 @@ export type Database = {
 
 export interface DatabaseResponse extends PartialPageObjectResponse {
   url: string;
-  cover: { file: { url: string } };
+  cover: { external: { url: string } };
   properties: DatabaseProp;
 }
 

@@ -50,7 +50,7 @@ export default class NotionAPI {
     const content = results.map((data) => {
       const id = data.id;
       const url = data.url;
-      const cover = data.cover.file.url;
+      const cover = data.cover.external?.url ?? "no cover";
       const properties = data.properties;
       return { id, properties, url, cover };
     });

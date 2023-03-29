@@ -5,3 +5,13 @@
 .controlButton {
   cursor: pointer;
 }
+
+.timeLine {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .timeLine {
+    display: none;
+  }
+}
