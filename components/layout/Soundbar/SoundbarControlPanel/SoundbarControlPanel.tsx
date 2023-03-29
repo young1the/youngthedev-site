@@ -24,7 +24,7 @@ const SoundbarControlPanel = (props: SoundbarControlPanelProps) => {
 
   return (
     <div className={style.controlContainer}>
-      <div>{convertToTime(width)}</div>
+      <div className={style.timeLine}>{convertToTime(width)}</div>
       <div onClick={onPrevClickHandler} className={style.controlButton}>
         {"<<"}
       </div>

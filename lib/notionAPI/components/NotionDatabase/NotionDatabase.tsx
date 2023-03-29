@@ -1,4 +1,3 @@
-import React from "react";
 import { Database } from "../../types";
 import style from "./NotionDatabase.module.css";
 

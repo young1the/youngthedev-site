@@ -18,7 +18,7 @@ const useTrackScroll = (trackList: string[]) => {
     const scrollEventHandler = () => {
       setScrollY(window.scrollY - 300);
     };
-    innerHeight.current = window.innerHeight;
+    innerHeight.current = window.innerHeight * 3;
     addEventListener("scroll", scrollEventHandler);
     return () => {
       removeEventListener("scroll", scrollEventHandler);
@@ -27,7 +27,7 @@ const useTrackScroll = (trackList: string[]) => {
 
   const getSubState = useCallback(
     (scrollY: number) => {
-      const elementHeight = innerHeight.current * 2;
+      const elementHeight = innerHeight.current;
       const newIndex = Math.floor(scrollY / elementHeight);
       const lastArticlePad = newIndex === trackList.length - 1 ? 100 : 0;
       const scrolled = elementHeight * newIndex;

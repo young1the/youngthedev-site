@@ -3,13 +3,34 @@
   cursor: pointer;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
-  height: 16rem;
   grid-gap: 1rem;
   padding: 2rem;
   border-radius: 8px;
   border: 1px solid var(--color);
   text-decoration: none;
   color: inherit;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .imageContainer {
+    display: none;
+  }
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .stackContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
 }
 
 .imageContainer {

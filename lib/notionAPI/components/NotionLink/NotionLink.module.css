@@ -19,3 +19,13 @@
 .git {
   filter: invert(var(--invert));
 }
+
+@media screen and (max-width: 767px) {
+  .linkText {
+    display: none;
+  }
+  .description::after {
+    display: inline;
+    content: "GitHub Link";
+  }
+}
