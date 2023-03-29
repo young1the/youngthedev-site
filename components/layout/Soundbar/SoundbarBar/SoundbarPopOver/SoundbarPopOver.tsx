@@ -11,8 +11,8 @@ interface SoundbarPopOver extends Pick<SoundbarProps, "titleIndex"> {
 
 const SoundbarPopOver = (props: SoundbarPopOver) => {
   const { memoizedComments, titleIndex, popOverIndex } = props;
-  if (!memoizedComments) return null;
   const comments = useMemo(() => {
+    if (!memoizedComments) return null;
     return memoizedComments.map((ele: MemoizedComment) => {
       return <SoundbarPopOverLine key={ele.id} memoizedComment={ele} />;
     });
@@ -20,7 +20,7 @@ const SoundbarPopOver = (props: SoundbarPopOver) => {
   return (
     <>
       {comments}
-      {memoizedComments[popOverIndex] ? (
+      {memoizedComments && memoizedComments[popOverIndex] ? (
         <SoundbarPopOverComment
           memoizedComment={memoizedComments[popOverIndex]}
           titleIndex={titleIndex}

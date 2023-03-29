@@ -52,15 +52,15 @@ const useTrackScroll = (trackList: string[]) => {
   }, []);
   const onPlayClickHandler = useCallback(() => {
     moveToDivElement(trackRefs.current[0]);
-  }, []);
+  }, [moveToDivElement]);
   const onNextClickHandler = useCallback(() => {
     const nextIndex = Math.min(titleIndex + 1, trackList.length - 1);
     moveToDivElement(trackRefs.current[nextIndex]);
-  }, []);
+  }, [moveToDivElement, titleIndex, trackList.length]);
   const onPrevClickHandler = useCallback(() => {
     const prevIndex = Math.max(titleIndex - 1, 0);
     moveToDivElement(trackRefs.current[prevIndex]);
-  }, []);
+  }, [moveToDivElement, titleIndex]);
 
   return {
     soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,
