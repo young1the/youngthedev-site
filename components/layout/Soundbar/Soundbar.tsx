@@ -1,5 +1,6 @@
 "use client";
 import { useFirebaseRealTimeDataBase } from "@/lib/firebase";
+import { useMemo } from "react";
 import style from "./Soundbar.module.css";
 import SoundbarBar from "./SoundbarBar/SoundbarBar";
 import SoundbarControlPanel from "./SoundbarControlPanel/SoundbarControlPanel";
@@ -19,13 +20,16 @@ export interface SoundbarProps {
 const Soundbar = (props: SoundbarProps) => {
   const { titleIndex } = props;
   const { data: tracks } = useFirebaseRealTimeDataBase<Tracks>();
-  const comments =
-    tracks && tracks[titleIndex] ? { ...tracks[titleIndex].comments } : null;
+  const comments = useMemo(() => {
+    return tracks && tracks[titleIndex]
+      ? { ...tracks[titleIndex].comments }
+      : null;
+  }, [titleIndex]);
   return (
     <div className={style.container}>
       <div className={style.panelContainer}>
-        <SoundbarThumbnail {...props} />
-        <SoundbarTitle {...props} />
+        <SoundbarThumbnail title={props.title} />
+        <SoundbarTitle title={props.title} />
       </div>
       <div className={style.panelContainer}>
         <SoundbarFeedBack {...props} />
@@ -33,7 +37,11 @@ const Soundbar = (props: SoundbarProps) => {
       <div className={style.panelContainer}>
         <SoundbarControlPanel {...props} />
       </div>
-      <SoundbarBar {...props} comments={comments} />
+      <SoundbarBar
+        width={props.width}
+        titleIndex={titleIndex}
+        comments={comments}
+      />
     </div>
   );
 };

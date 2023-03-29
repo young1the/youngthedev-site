@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import { memo } from "react";
 import style from "./UserAvatar.module.css";
 
 interface UserAvatarProps {
@@ -31,4 +32,4 @@ const UserAvatar = (props: UserAvatarProps) => {
   );
 };
 
-export default UserAvatar;
+export default memo(UserAvatar);

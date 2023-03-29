@@ -12,6 +12,12 @@
   z-index: 3;
 }
 
+@media screen and (max-width: 767px) {
+  .container {
+    bottom: 0;
+  }
+}
+
 .panelContainer {
   flex: 1;
   display: flex;

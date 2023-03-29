@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode, Ref } from "react";
+import { forwardRef, memo, ReactNode, Ref } from "react";
 import style from "./Article.module.css";
 
 type ArticleProps = {
@@ -17,4 +17,4 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
 
 Article.displayName = "Article";
 
-export default Article;
+export default memo(Article);

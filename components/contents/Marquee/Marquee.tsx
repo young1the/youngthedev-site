@@ -1,3 +1,4 @@
+import { memo } from "react";
 import style from "./Marquee.module.css";
 
 interface MarqueeProps {
@@ -25,4 +26,4 @@ const Marquee = ({ value, isTop = false }: MarqueeProps) => {
   );
 };
 
-export default Marquee;
+export default memo(Marquee);

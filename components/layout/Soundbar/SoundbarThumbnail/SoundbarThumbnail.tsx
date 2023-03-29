@@ -1,6 +1,7 @@
 import Spinner from "@/components/contents/Spinner/Spinner";
 import style from "./SoundbarThumbnail.module.css";
 import { SoundbarProps } from "../Soundbar";
+import { memo } from "react";
 
 interface SoundbarThumbnailProps extends Pick<SoundbarProps, "title"> {}
 
@@ -23,4 +24,4 @@ const SoundbarThumbnail = (props: SoundbarThumbnailProps) => {
   );
 };
 
-export default SoundbarThumbnail;
+export default memo(SoundbarThumbnail);
