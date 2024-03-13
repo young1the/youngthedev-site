@@ -14,9 +14,7 @@ export default class NotionAPI {
   private static _notionInstance = new Client({ auth: this._apiKey });
 
   public static async getCMS() {
-    const datas = (await this._getBlockContents(
-      this._CMSID as string
-    )) as CMSBlock[];
+    const datas = await this._getBlockContents(this._CMSID!) as CMSBlock[];
     const results: NotionData[] = await Promise.all(
       datas.map(async (block) => {
         const type = block.type;
@@ -25,8 +23,10 @@ export default class NotionAPI {
         let content;
         if (type === "child_page") {
           content = await this._getPageContent(id);
-        } else {
+        } else if (type === "child_database") {
           content = await this._getDatabaseWithQuery(id);
+        } else {
+          return null!;
         }
         return { type, id, title, content };
       })

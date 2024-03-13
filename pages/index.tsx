@@ -22,7 +22,7 @@ interface HomeProps {
 
 export async function getStaticProps() {
   const notionCMS = await NotionAPI.getCMS();
-  const trackList = notionCMS.map((ele) => ele.title);
+  const trackList = notionCMS.filter(ele => !!ele).map((ele) => ele.title);
   return {
     props: {
       notionCMS,

@@ -19,7 +19,7 @@ const NotionArticles = (props: NotionArticlesProps) => {
   return (
     <>
       {notionCMS &&
-        notionCMS.map((data: NotionData, index: number) => {
+        notionCMS.filter(data => !!data).map((data: NotionData, index: number) => {
           let content;
           if (data.type === "child_page") {
             content = (
@@ -28,13 +28,15 @@ const NotionArticles = (props: NotionArticlesProps) => {
                 content={data.content as Page[]}
               />
             );
-          } else {
+          } else if (data.type === "child_database") {
             content = (
               <NotionDatabaseRenderer
                 key={data.id + "content"}
                 content={data.content as Database[]}
               />
             );
+          } else {
+            return null;
           }
           return (
             <Article
