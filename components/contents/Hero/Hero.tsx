@@ -1,6 +1,6 @@
 import style from "./Hero.module.css";
 import Marquee from "../Marquee/Marquee";
-import Button from "@/components/button/Button/Button";
+import { Button } from "@/components/ui/button"
 import TrackList from "../TrackList/TrackList";
 import { memo } from "react";
 
@@ -38,7 +38,7 @@ const Hero = ({ onClick, trackList }: HeroProps) => {
           </div>
         </div>
         <div className={style.action}>
-          <Button label="재생하기" onClick={onClick} />
+          <Button onClick={onClick} >재생하기</Button>
         </div>
       </div>
       <TrackList trackList={trackList} />
