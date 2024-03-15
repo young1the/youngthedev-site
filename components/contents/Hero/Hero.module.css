@@ -13,6 +13,18 @@
         display: flex;
         flex-direction: column;
         gap:1rem;
+        align-items: center;
+    }
+
+    .actions, .artwork, .heading, .info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info {
+        padding: 0 1rem;
     }
 }
 
@@ -36,11 +48,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    line-height: 2rem;
-    column-gap: 2rem;
+    align-items: center;
 }
 
-.action {
+.actions {
     margin-top: 1rem;
     grid-area: actions;
     display: flex;

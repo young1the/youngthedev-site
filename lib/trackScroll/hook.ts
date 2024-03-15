@@ -61,6 +61,7 @@ const useTrackScroll = (trackList: string[]) => {
     const prevIndex = Math.max(titleIndex - 1, 0);
     moveToDivElement(trackRefs.current[prevIndex]);
   }, [moveToDivElement, titleIndex]);
+  const moveToDivElementByIndex = (index: number) => moveToDivElement(trackRefs.current[index]);
 
   return {
     soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,
@@ -70,6 +71,7 @@ const useTrackScroll = (trackList: string[]) => {
     onPlayClickHandler,
     onNextClickHandler,
     onPrevClickHandler,
+    moveToDivElementByIndex,
   };
 };
 

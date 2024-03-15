@@ -7,7 +7,7 @@ type ArticleProps = {
 const Article = forwardRef<HTMLDivElement, ArticleProps>(
     ({children}: ArticleProps, ref: Ref<HTMLDivElement>) => {
         return (
-            <div ref={ref}>
+            <div className="min-h-screen flex justify-center items-center p-4" ref={ref}>
                 {children}
             </div>
         );

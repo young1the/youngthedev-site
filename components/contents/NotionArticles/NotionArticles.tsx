@@ -33,6 +33,7 @@ const NotionArticles = (props: NotionArticlesProps) => {
               <NotionDatabaseRenderer
                 key={data.id + "content"}
                 content={data.content as Database[]}
+                title={data.title}
               />
             );
           } else {
