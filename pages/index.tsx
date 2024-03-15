@@ -58,7 +58,6 @@ export default function Home({notionCMS, trackList}: HomeProps) {
                 <div className="w-full max-w-2xl mx-auto">
                     <NotionArticles notionCMS={notionCMS} trackRefs={trackRefs}/>
                 </div>
-                <div className="h-[100px] w-full"></div>
             </div>
         </>
     );
