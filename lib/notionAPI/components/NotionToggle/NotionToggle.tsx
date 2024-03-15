@@ -1,6 +1,6 @@
 import { Page, TextContent } from "@/lib/notionAPI";
 import NotionParagraph from "../NotionParagraph/NotionParagraph";
-import style from "./NotionToggle.module.css";
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 
 interface NotionToggleProps {
   content: TextContent;
@@ -8,18 +8,16 @@ interface NotionToggleProps {
 }
 const NotionToggle = ({ content, toggleChildren }: NotionToggleProps) => {
   return (
-    <label>
-      <input type="checkbox" className={style.checkbox}></input>
-      <div className={style.toggle}>
-        <p className={style.toggleTriangle}>▶︎</p>
-        <NotionParagraph content={content} />
-      </div>
-      {toggleChildren.map((ele, index) => (
-        <li key={index}>
-          <NotionParagraph content={ele.content as TextContent} />
-        </li>
-      ))}
-    </label>
+      <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+              <AccordionTrigger><NotionParagraph content={content}></NotionParagraph></AccordionTrigger>
+              <AccordionContent>
+                  {toggleChildren.map((ele,index) => (
+                        <NotionParagraph key={index} content={ele.content as TextContent}></NotionParagraph>
+                  ))}
+              </AccordionContent>
+          </AccordionItem>
+      </Accordion>
   );
 };
 

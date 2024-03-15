@@ -1,9 +1,0 @@
-.wrapper {
-  height: 300vh;
-  display: flex;
-  flex-direction: column;
-  padding: 4rem;
-  gap: 2rem;
-  max-width: 768px;
-  margin: auto;
-}

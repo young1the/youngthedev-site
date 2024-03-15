@@ -1,4 +1,3 @@
-import Title from "@/components/text/Title/Title";
 import {
   Database,
   NotionData,
@@ -19,29 +18,32 @@ const NotionArticles = (props: NotionArticlesProps) => {
   return (
     <>
       {notionCMS &&
-        notionCMS.map((data: NotionData, index: number) => {
+        notionCMS.filter(data => !!data).map((data: NotionData, index: number) => {
           let content;
           if (data.type === "child_page") {
             content = (
               <NotionPageRenderer
                 key={data.id + "content"}
                 content={data.content as Page[]}
+                title={data.title}
               />
             );
-          } else {
+          } else if (data.type === "child_database") {
             content = (
               <NotionDatabaseRenderer
                 key={data.id + "content"}
                 content={data.content as Database[]}
+                title={data.title}
               />
             );
+          } else {
+            return null;
           }
           return (
             <Article
               key={data.id}
               ref={(ref) => (trackRefs.current[index] = ref)}
             >
-              <Title key={data.id + "title"} value={data.title} />
               {content}
             </Article>
           );

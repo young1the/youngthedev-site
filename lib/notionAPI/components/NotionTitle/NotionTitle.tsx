@@ -1,10 +1,11 @@
-import style from "./NotionTitle.module.css";
-
 interface NotionTitleProps {
-  value: string;
+    value: string;
 }
-const NotionTitle = ({ value }: NotionTitleProps) => {
-  return <h1 className={style.title}>{value}</h1>;
+
+const NotionTitle = ({value}: NotionTitleProps) => {
+    return <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mt-2 border-b pb-2">
+        {value}
+    </h2>
 };
 
 export default NotionTitle;

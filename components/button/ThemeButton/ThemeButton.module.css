@@ -7,13 +7,8 @@
   animation: spin 2s linear infinite;
   cursor: pointer;
   position: relative;
-}
-
-.star {
-  -webkit-filter: invert(var(--invert));
-  -ms-filter: invert(var(--invert));
-  -o-filter: invert(var(--invert));
-  filter: invert(var(--invert));
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 @keyframes spin {

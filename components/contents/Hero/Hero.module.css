@@ -1,79 +1,59 @@
-.wrapper {
-  width: 100%;
-  padding: 3rem;
-  max-width: 768px;
-  margin: auto;
-}
-
 .grid {
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  grid-template-columns: repeat(9, auto);
-  grid-template-areas:
-    "aw aw aw aw if if if if if"
-    "aw aw aw aw if if if if if"
-    "aw aw aw aw if if if if if"
-    "aw aw aw aw ac ac ac ac ac";
+    display: grid;
+    grid-template-areas:
+        "artwork heading"
+        "artwork info"
+        "artwork actions";
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
 }
 
 @media screen and (max-width: 767px) {
-  .grid {
-    gap: 3rem;
-    grid-template-rows: auto; /* 행 높이를 자동으로 설정 */
-    grid-template-columns: 1fr; /* 하나의 열만 사용 */
-    grid-template-areas:
-      "aw"
-      "aw"
-      "aw"
-      "aw"
-      "if"
-      "if"
-      "if"
-      "if"
-      "ac";
-  }
+    .grid {
+        display: flex;
+        flex-direction: column;
+        gap:1rem;
+        align-items: center;
+    }
+
+    .actions, .artwork, .heading, .info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .info {
+        padding: 0 1rem;
+    }
 }
 
 .artwork {
-  position: relative;
-  grid-area: aw;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-right: 24px;
+    width: 300px;
+    aspect-ratio: 1;
+    grid-area: artwork;
+    position: relative;
+    overflow: hidden;
+}
+
+.heading {
+    grid-area: heading;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }
 
 .info {
-  grid-area: if;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  line-height: 2rem;
-  column-gap: 2rem;
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.info h1 {
-  font-size: 2rem;
-  font-weight: 700;
-}
-.info h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.infoDescription {
-  margin-top: 1rem;
-}
-
-.action {
-  margin-top: 1rem;
-  grid-area: ac;
-  display: flex;
-  align-items: flex-end;
-}
-
-.trackList {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(2, 1fr);
+.actions {
+    margin-top: 1rem;
+    grid-area: actions;
+    display: flex;
+    align-items: flex-end;
 }

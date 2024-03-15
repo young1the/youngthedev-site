@@ -1,49 +1,50 @@
 import style from "./Hero.module.css";
 import Marquee from "../Marquee/Marquee";
-import Button from "@/components/button/Button/Button";
-import TrackList from "../TrackList/TrackList";
-import { memo } from "react";
+import {Button} from "@/components/ui/button"
+import {memo} from "react";
+import {TypographyH1} from "@/components/ui/TypographyH1";
+import {TypographyH2} from "@/components/ui/TypographyH2";
+import {TypographyMuted} from "@/components/ui/TypographyMuted";
+import {TypographyP} from "@/components/ui/TypographyP";
 
 interface HeroProps {
-  onClick: VoidFunction;
-  trackList: string[];
+    onClick: VoidFunction;
+    trackList: string[];
+    trackOnClick: (index: number) => void;
 }
 
-const Hero = ({ onClick, trackList }: HeroProps) => {
-  return (
-    <main className={style.wrapper}>
-      <div className={style.grid}>
-        <div className={style.artwork}>
-          <Marquee value="New Release" isTop={true} />
-          <img
-            draggable={false}
-            src="/artwork.jpeg"
-            style={{ width: "100%", height: "100%" }}
-            alt="artwork"
-          />
-          <Marquee value="New Release" />
-        </div>
-        <div className={style.info}>
-          <div>
-            <h1>1st Mini Album</h1>
-            <h3>WEB F/E * 2023년</h3>
-            <h2>YOUNGTHEDEV</h2>
-          </div>
-          <div className={style.infoDescription}>
-            <p>
-              {
-                "YOUNGTHEDEV(조영일)의 첫번째 데뷔 앨범입니다. 기존 포트폴리오의 단방향 소통의 한계를 탈피하고, 재미있는 경험을 주기 위한 노력을 담았습니다. 기능들은 라이브러리화 하여 유지보수를 쉽게하고 가독성을 높였습니다."
-              }
-            </p>
-          </div>
-        </div>
-        <div className={style.action}>
-          <Button label="재생하기" onClick={onClick} />
-        </div>
-      </div>
-      <TrackList trackList={trackList} />
-    </main>
-  );
+const Hero = ({onClick, trackList, trackOnClick}: HeroProps) => {
+    return (
+        <main className="min-h-screen flex justify-center items-center">
+            <div>
+                <div className={style.grid}>
+                    <div className={style.artwork}>
+                        <Marquee value="New Release" isTop={true}/>
+                        <img src="/artwork.jpeg" alt="album-cover" style={{width: '100%', aspectRatio: 1}}/>
+                        <Marquee value="New Release"/>
+                    </div>
+                    <div className={style.heading}>
+                        <TypographyH1>1st Mini Album</TypographyH1>
+                        <TypographyMuted>WEB F/E * 2024년</TypographyMuted>
+                        <TypographyH2>조영일</TypographyH2>
+                    </div>
+                    <div className={style.info}>
+                        <TypographyP>
+                            YOUNGTHEDEV(조영일)의 첫번째 데뷔 앨범입니다. 기존 포트폴리오의 단방향 소통의 한계를 벗어나, 재미있는 경험을 주기 위한 노력을 담았습니다.
+                        </TypographyP>
+                    </div>
+                    <div className={style.actions}>
+                        <Button onClick={onClick}>재생하기</Button>
+                    </div>
+                </div>
+                <ul className="my-6 ml-6 list-decimal [&>li]:mt-2 p-4">
+                    {trackList.map((item, index) => (
+                        <li className="cursor-pointer font-bold" onClick={()=>trackOnClick(index)} key={index}>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        </main>
+    );
 };
 
 export default memo(Hero);
