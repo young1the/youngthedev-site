@@ -39,7 +39,7 @@ const Hero = ({onClick, trackList, trackOnClick}: HeroProps) => {
                 </div>
                 <ul className="my-6 ml-6 list-decimal [&>li]:mt-2 p-4">
                     {trackList.map((item, index) => (
-                        <li className="cursor-pointer" onClick={()=>trackOnClick(index)} key={index}>{item}</li>
+                        <li className="cursor-pointer font-bold" onClick={()=>trackOnClick(index)} key={index}>{item}</li>
                     ))}
                 </ul>
             </div>

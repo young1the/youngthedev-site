@@ -1,19 +1,18 @@
 .logoText {
   display: inline-block;
-  font-size: 1.5rem;
-  border-right: 0.5rem solid;
+  font-size: 1rem;
+  border-right: 0.4rem solid;
   padding-right: 0.5rem;
   text-decoration: none;
-  color: var(--color);
   animation: blink 0.5s step-end infinite alternate;
 }
 
 @keyframes blink {
   from,
   to {
-    border-right-color: var(--color);
+    border-right-color: white;
   }
   50% {
-    border-right-color: var(--background);
+    border-right-color: #010101;
   }
 }

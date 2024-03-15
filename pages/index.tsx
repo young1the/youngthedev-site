@@ -44,19 +44,21 @@ export default function Home({notionCMS, trackList}: HomeProps) {
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <div className="w-full flex items-center justify-center sm:px-4 md:px-4 lg:p-0">
-                {/*<Soundbar*/}
-                {/*    width={soundbarWidth}*/}
-                {/*    title={currentTitle}*/}
-                {/*    titleIndex={titleIndex}*/}
-                {/*    onNextClickHandler={onNextClickHandler}*/}
-                {/*    onPrevClickHandler={onPrevClickHandler}*/}
-                {/*/>*/}
-                <div className="mt-[100px] w-full max-w-2xl mx-auto">
+            <div className="w-full flex flex-col items-center justify-center sm:px-4 md:px-4 lg:p-0">
+                <div className="w-full max-w-2xl mx-auto">
                     <Hero onClick={onPlayClickHandler} trackList={trackList} trackOnClick={moveToDivElementByIndex}/>
-                    <NotionArticles notionCMS={notionCMS} trackRefs={trackRefs}/>
-                    <div className="h-[100px] w-full"></div>
                 </div>
+                <Soundbar
+                    width={soundbarWidth}
+                    title={currentTitle}
+                    titleIndex={titleIndex}
+                    onNextClickHandler={onNextClickHandler}
+                    onPrevClickHandler={onPrevClickHandler}
+                />
+                <div className="w-full max-w-2xl mx-auto">
+                    <NotionArticles notionCMS={notionCMS} trackRefs={trackRefs}/>
+                </div>
+                <div className="h-[100px] w-full"></div>
             </div>
         </>
     );

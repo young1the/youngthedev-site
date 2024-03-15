@@ -17,7 +17,7 @@ const SoundbarPopOverComment = (props: SoundbarPopOverCommentProps) => {
     right: time > 50 ? position : "",
   };
   return (
-    <div className={style.popOverComment} style={dynamicStyle}>
+    <div className="max-w-[50vw] truncate overflow-ellipsis absolute border-b shadow bg-background/95 -top-16 p-4" style={dynamicStyle}>
       {displayName}
       {" : "}
       {comment}
