@@ -1,5 +1,4 @@
 import style from "./Hero.module.css";
-import Marquee from "../Marquee/Marquee";
 import {Button} from "@/components/ui/button"
 import {memo} from "react";
 import {TypographyH1} from "@/components/ui/TypographyH1";
@@ -16,12 +15,10 @@ interface HeroProps {
 const Hero = ({onClick, trackList, trackOnClick}: HeroProps) => {
     return (
         <main className="min-h-screen flex justify-center items-center">
-            <div>
+            <div className="mt-24">
                 <div className={style.grid}>
                     <div className={style.artwork}>
-                        <Marquee value="New Release" isTop={true}/>
-                        <img src="/artwork.jpeg" alt="album-cover" style={{width: '100%', aspectRatio: 1}}/>
-                        <Marquee value="New Release"/>
+                        <img src="/artwork.jpeg" alt="album-cover" width="300px" height="300px"/>
                     </div>
                     <div className={style.heading}>
                         <TypographyH1>1st Mini Album</TypographyH1>

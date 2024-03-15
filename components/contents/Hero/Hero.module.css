@@ -17,7 +17,6 @@
     }
 
     .actions, .artwork, .heading, .info {
-        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,7 +28,7 @@
 }
 
 .artwork {
-    width: 300px;
+    width: 100%;
     aspect-ratio: 1;
     grid-area: artwork;
     position: relative;

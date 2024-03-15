@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef, useCallback, useMemo} from "react";
+import {useState, useEffect, useRef, useCallback} from "react";
 
 const useTrackScroll = (trackList: string[]) => {
     const [scrollY, setScrollY] = useState(0);
@@ -14,13 +14,8 @@ const useTrackScroll = (trackList: string[]) => {
         };
     }, []);
 
-    const trackHeights = useMemo(() => {
-        if (trackRefs.current.length === 0) return [];
-        return trackRefs.current.map((ele) => ele?.offsetTop);
-    }, [trackRefs]);
-
-    useEffect(
-        () => {
+    useEffect(() => {
+            const trackHeights = trackRefs.current != null ? trackRefs.current.map((ele) => ele?.offsetTop) : [];
             if (trackHeights.length === 0) return;
             const editedScrollY = scrollY + window.innerHeight / 2;
             const getNewIndex = () => {
@@ -39,7 +34,7 @@ const useTrackScroll = (trackList: string[]) => {
                 : progress * 100;
             setScrollInfo({index: newIndex, width: newWidth});
         },
-        [trackList.length, trackHeights, scrollY]
+        [scrollY]
     );
 
     const moveToDivElement = useCallback((element: HTMLDivElement | null) => {
@@ -50,6 +45,7 @@ const useTrackScroll = (trackList: string[]) => {
             });
         }
     }, []);
+
     const onPlayClickHandler = useCallback(() => {
         moveToDivElement(trackRefs.current[0]);
     }, [moveToDivElement]);
