@@ -1,7 +1,8 @@
-import {useState, useEffect, useRef, useCallback, useMemo} from "react";
+import {useState, useEffect, useRef, useCallback} from "react";
 
 const useTrackScroll = (trackList: string[]) => {
     const [scrollY, setScrollY] = useState(0);
+    const [scrollInfo, setScrollInfo] = useState<{ index: number; width: number }>({index: -1, width: 0});
     const trackRefs = useRef<(HTMLDivElement | null)[]>([]);
     useEffect(() => {
         const scrollEventHandler = () => {
@@ -13,14 +14,9 @@ const useTrackScroll = (trackList: string[]) => {
         };
     }, []);
 
-    const trackHeights = useMemo(() => {
-        if (trackRefs.current.length === 0) return [];
-        return trackRefs.current.map((ele) => ele?.offsetTop);
-    }, [trackRefs]);
-
-    const {newIndex: titleIndex, newWidth: soundbarWidth} = useMemo(
-        () => {
-            if (trackHeights.length === 0) return {newIndex: -1, newWidth: 0};
+    useEffect(() => {
+            const trackHeights = trackRefs.current != null ? trackRefs.current.map((ele) => ele?.offsetTop) : [];
+            if (trackHeights.length === 0) return;
             const editedScrollY = scrollY + window.innerHeight / 2;
             const getNewIndex = () => {
                 for (let i = 0; i < trackHeights.length; i++) {
@@ -36,9 +32,9 @@ const useTrackScroll = (trackList: string[]) => {
             const newWidth = newIndex === trackHeights.length - 1 ?
                 (progress * 2) * 100
                 : progress * 100;
-            return {newIndex, newWidth};
+            setScrollInfo({index: newIndex, width: newWidth});
         },
-        [trackList.length, trackHeights, scrollY]
+        [scrollY]
     );
 
     const moveToDivElement = useCallback((element: HTMLDivElement | null) => {
@@ -49,23 +45,24 @@ const useTrackScroll = (trackList: string[]) => {
             });
         }
     }, []);
+
     const onPlayClickHandler = useCallback(() => {
         moveToDivElement(trackRefs.current[0]);
     }, [moveToDivElement]);
     const onNextClickHandler = useCallback(() => {
-        const nextIndex = Math.min(titleIndex + 1, trackList.length - 1);
+        const nextIndex = Math.min(scrollInfo.index + 1, trackList.length - 1);
         moveToDivElement(trackRefs.current[nextIndex]);
-    }, [moveToDivElement, titleIndex, trackList.length]);
+    }, [moveToDivElement, scrollInfo.index, trackList.length]);
     const onPrevClickHandler = useCallback(() => {
-        const prevIndex = Math.max(titleIndex - 1, 0);
+        const prevIndex = Math.max(scrollInfo.index - 1, 0);
         moveToDivElement(trackRefs.current[prevIndex]);
-    }, [moveToDivElement, titleIndex]);
+    }, [moveToDivElement, scrollInfo.index]);
     const moveToDivElementByIndex = (index: number) => moveToDivElement(trackRefs.current[index]);
 
     return {
-        soundbarWidth: titleIndex < 0 ? 0 : soundbarWidth,
-        currentTitle: titleIndex < 0 ? "Loading" : trackList[titleIndex],
-        titleIndex,
+        soundbarWidth: scrollInfo.index < 0 ? 0 : scrollInfo.width,
+        currentTitle: scrollInfo.index < 0 ? "Loading" : trackList[scrollInfo.index],
+        titleIndex: scrollInfo.index,
         trackRefs,
         onPlayClickHandler,
         onNextClickHandler,
