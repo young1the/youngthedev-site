@@ -1,20 +1,22 @@
 import React from "react";
 import NotionDatabase from "../../components/NotionDatabase/NotionDatabase";
-import { Database } from "../../types";
-import style from "./NotionDatabaseRenderer.module.css";
+import {Database} from "../../types";
+import NotionTitle from "@/lib/notionAPI/components/NotionTitle/NotionTitle";
 
 interface NotionDatabaseRendererProps {
-  content: Database[];
+    title: string;
+    content: Database[];
 }
 
-const NotionDatabaseRenderer = ({ content }: NotionDatabaseRendererProps) => {
-  return (
-    <div className={style.wrapper}>
-      {content.map((project) => (
-        <NotionDatabase key={project.id} content={project} />
-      ))}
-    </div>
-  );
+const NotionDatabaseRenderer = ({title, content}: NotionDatabaseRendererProps) => {
+    return (
+        <article className="flex flex-col gap-8">
+            <NotionTitle value={title}></NotionTitle>
+            {content.map((project) => (
+                <NotionDatabase key={project.id} content={project}/>
+            ))}
+        </article>
+    );
 };
 
 export default NotionDatabaseRenderer;
