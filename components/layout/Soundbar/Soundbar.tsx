@@ -1,6 +1,5 @@
 "use client";
 import { useFirebaseRealTimeDataBase } from "@/lib/firebase";
-import { useMemo } from "react";
 import style from "./Soundbar.module.css";
 import SoundbarBar from "./SoundbarBar/SoundbarBar";
 import SoundbarControlPanel from "./SoundbarControlPanel/SoundbarControlPanel";

@@ -1,30 +1,36 @@
-import { LinkPreviewType } from "@/lib/notionAPI";
-import style from "./NotionLink.module.css";
+import {LinkPreviewType} from "@/lib/notionAPI";
+import {Card, CardContent} from "@/components/ui/card";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 interface NotionLinkProps {
-  content: LinkPreviewType;
+    content: LinkPreviewType;
 }
-const NotionLink = ({ content }: NotionLinkProps) => {
-  return (
-    <a
-      href={content.url}
-      className={style.link}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div className={style.imageWrapper}>
-        <img
-          className={style.git}
-          src="/github.png"
-          style={{ width: "100%", height: "100%" }}
-          alt="github"
-        />
-      </div>
-      <div className={style.description}>
-        <p className={style.linkText}>{content.url}</p>
-      </div>
-    </a>
-  );
+
+const NotionLink = ({content}: NotionLinkProps) => {
+    return (
+        <a
+            href={content.url}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <Card className="w-full">
+                <CardContent className="pt-6">
+                    <div className="flex items-center space-x-4">
+                        <Avatar>
+                            <AvatarImage src="/github.png"/>
+                            <AvatarFallback>VC</AvatarFallback>
+                        </Avatar>
+                        <div className="space-y-1">
+                            <h4 className="text-sm font-semibold">GitHub Link</h4>
+                            <p className="text-sm">
+                                {content.url}
+                            </p>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+        </a>
+    );
 };
 
 export default NotionLink;

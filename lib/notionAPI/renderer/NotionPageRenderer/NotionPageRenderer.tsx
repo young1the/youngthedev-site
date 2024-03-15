@@ -2,14 +2,15 @@ import { Fragment, memo } from "react";
 import NotionLink from "../../components/NotionLink/NotionLink";
 import NotionParagraph from "../../components/NotionParagraph/NotionParagraph";
 import NotionToggle from "../../components/NotionToggle/NotionToggle";
-import style from "./NotionPageRenderer.module.css";
 import { LinkPreviewType, Page, TextContent } from "@/lib/notionAPI/types";
+import NotionTitle from "@/lib/notionAPI/components/NotionTitle/NotionTitle";
 
 interface NotionPageRendererProps {
+  title: string;
   content: Page[];
 }
 
-const NotionPageRenderer = ({ content }: NotionPageRendererProps) => {
+const NotionPageRenderer = ({ title, content }: NotionPageRendererProps) => {
   const toJSX = (page: Page): JSX.Element | null => {
     let { type, id, content, children } = page;
     switch (type) {
@@ -39,9 +40,10 @@ const NotionPageRenderer = ({ content }: NotionPageRendererProps) => {
   };
 
   return (
-    <div className={style.wrapper}>
+    <article>
+      <NotionTitle value={title}/>
       {content.map((ele: Page) => toJSX(ele))}
-    </div>
+    </article>
   );
 };
 

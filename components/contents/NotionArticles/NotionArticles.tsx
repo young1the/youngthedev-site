@@ -1,4 +1,3 @@
-import Title from "@/components/text/Title/Title";
 import {
   Database,
   NotionData,
@@ -26,6 +25,7 @@ const NotionArticles = (props: NotionArticlesProps) => {
               <NotionPageRenderer
                 key={data.id + "content"}
                 content={data.content as Page[]}
+                title={data.title}
               />
             );
           } else if (data.type === "child_database") {
@@ -43,7 +43,6 @@ const NotionArticles = (props: NotionArticlesProps) => {
               key={data.id}
               ref={(ref) => (trackRefs.current[index] = ref)}
             >
-              <Title key={data.id + "title"} value={data.title} />
               {content}
             </Article>
           );
