@@ -18,8 +18,8 @@ const useTrackScroll = (trackList: string[]) => {
         return trackRefs.current.map((ele) => ele?.offsetTop);
     }, [trackRefs]);
 
-    const getSubState = useCallback(
-        (scrollY: number) => {
+    const {newIndex: titleIndex, newWidth: soundbarWidth} = useMemo(
+        () => {
             if (trackHeights.length === 0) return {newIndex: -1, newWidth: 0};
             const editedScrollY = scrollY + window.innerHeight / 2;
             const getNewIndex = () => {
@@ -38,10 +38,8 @@ const useTrackScroll = (trackList: string[]) => {
                 : progress * 100;
             return {newIndex, newWidth};
         },
-        [trackList.length, trackHeights]
+        [trackList.length, trackHeights, scrollY]
     );
-
-    const {newIndex: titleIndex, newWidth: soundbarWidth} = getSubState(scrollY);
 
     const moveToDivElement = useCallback((element: HTMLDivElement | null) => {
         if (element) {

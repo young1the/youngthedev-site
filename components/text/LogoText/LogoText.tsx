@@ -5,7 +5,7 @@ const LogoText = () => {
     return (
         <div className="py-2">
             <Link className={style.logoText} href="/">
-                youngthedev
+                YOUNGTHEDEV
             </Link>
         </div>
     );

@@ -26,7 +26,7 @@ const Hero = ({onClick, trackList, trackOnClick}: HeroProps) => {
                     <div className={style.heading}>
                         <TypographyH1>1st Mini Album</TypographyH1>
                         <TypographyMuted>WEB F/E * 2024년</TypographyMuted>
-                        <TypographyH2>YOUNGTHEDEV</TypographyH2>
+                        <TypographyH2>조영일</TypographyH2>
                     </div>
                     <div className={style.info}>
                         <TypographyP>

@@ -3,7 +3,7 @@ interface NotionTitleProps {
 }
 
 const NotionTitle = ({value}: NotionTitleProps) => {
-    return <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mt-2">
+    return <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mt-2 border-b pb-2">
         {value}
     </h2>
 };
